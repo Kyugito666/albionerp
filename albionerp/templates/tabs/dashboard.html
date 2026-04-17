@@ -1,0 +1,371 @@
+{% raw %}
+<div v-if="activeTab === 'dashboard'">
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="glass-card p-6 border border-gray-800/60 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl bg-[#0B1120]/80 hover:border-emerald-500/30 transition-all group">
+            <h3 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-1 group-hover:text-emerald-500/70 transition-colors">Capital Cost</h3>
+            <p class="text-3xl font-black text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.4)]">{{ data ? (data.financial.total_capital).toLocaleString() : '0' }}</p>
+        </div>
+        <div class="glass-card p-6 border border-gray-800/60 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl bg-[#0B1120]/80 hover:border-cyan-500/30 transition-all group">
+            <h3 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-1 group-hover:text-cyan-500/70 transition-colors">Expected Revenue</h3>
+            <p class="text-3xl font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">{{ data ? (data.financial.total_capital + data.financial.grand_profit).toLocaleString() : '0' }}</p>
+        </div>
+        <div class="glass-card p-6 border border-gray-800/60 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl bg-[#0B1120]/80 transition-all group" :class="data && data.financial.grand_profit < 0 ? 'hover:border-rose-500/40' : 'hover:border-yellow-500/40'">
+            <h3 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-1 group-hover:text-yellow-500/70 transition-colors">Net Profit</h3>
+            <p class="text-3xl font-black drop-shadow-md" :class="data && data.financial.grand_profit < 0 ? 'text-rose-500 drop-shadow-[0_0_10px_rgba(244,63,94,0.4)]' : 'text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.4)]'">{{ data ? (data.financial.grand_profit).toLocaleString() : '0' }}</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+        <div class="glass-card p-6 border border-gray-800/60 shadow-2xl backdrop-blur-xl bg-[#0B1120]/80">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-5 border-b border-gray-700/50 pb-3">
+                <h2 class="text-sm font-black text-indigo-400 uppercase tracking-widest flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span> Target Quantity & Routing
+                </h2>
+                <!-- MASTER TOGGLES -->
+                <div class="flex gap-4">
+                    <label v-if="!cfg.use_multi_consumables" class="flex items-center gap-3 bg-black/40 px-4 py-2 rounded-xl border border-gray-800 cursor-pointer hover:border-amber-500/30 transition-all group">
+                        <span class="text-[10px] font-black uppercase tracking-widest transition-colors" :class="cfg.use_refine_only ? 'text-amber-400' : 'text-gray-500'">Refine Only Mode</span>
+                        <div class="relative inline-flex items-center">
+                            <input type="checkbox" v-model="cfg.use_refine_only" @change="saveAndFetch" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600 shadow-inner"></div>
+                        </div>
+                    </label>
+                    <label v-if="!cfg.use_refine_only" class="flex items-center gap-3 bg-black/40 px-4 py-2 rounded-xl border border-gray-800 cursor-pointer hover:border-emerald-500/30 transition-all group">
+                        <span class="text-[10px] font-black uppercase tracking-widest transition-colors" :class="cfg.use_multi_consumables ? 'text-emerald-400' : 'text-gray-500'">Cooking & Alchemy Mode</span>
+                        <div class="relative inline-flex items-center">
+                            <input type="checkbox" v-model="cfg.use_multi_consumables" @change="saveAndFetch" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600 shadow-inner"></div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="mb-5">
+                <p class="text-xs font-bold text-gray-400 mb-3 flex items-center gap-2">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> 
+                    <span v-if="cfg.use_refine_only">Target Material & Tier</span>
+                    <span v-else-if="cfg.use_multi_consumables">Consumable Batch Quantities (per Enchant)</span>
+                    <span v-else>Tier & Gear Batch Quantities</span>
+                </p>
+                <div class="grid grid-cols-3 md:grid-cols-7 gap-2">
+                    <div v-if="cfg.use_refine_only">
+                        <select v-model="cfg.refine_only_mat" @change="saveAndFetch" class="input-pro px-1 py-2 w-full rounded-lg font-black text-sm text-center bg-[#090F1C] border border-amber-700 text-amber-400 focus:border-amber-500 shadow-inner">
+                            <option value="cloth">Cloth</option>
+                            <option value="leather">Leather</option>
+                            <option value="steel">Steel</option>
+                            <option value="plank">Plank</option>
+                            <option value="block">Block</option>
+                        </select>
+                    </div>
+                    <div v-if="!cfg.use_multi_consumables">
+                        <select v-model="cfg.tier" @change="saveAndFetch" class="input-pro px-1 py-2 w-full rounded-lg font-black text-sm text-center bg-[#090F1C] border border-gray-700 text-white focus:border-indigo-500 shadow-inner">
+                            <option v-for="n in [3,4,5,6,7,8]" :value="n">T{{ n }}</option>
+                        </select>
+                    </div>
+                    <div v-else class="bg-black/20 border border-gray-800 rounded-lg flex items-center justify-center text-[10px] font-black text-gray-600 uppercase">
+                        Fixed T
+                    </div>
+                    <input type="number" v-model="cfg.q0" @input="saveAndFetch" placeholder=".0" class="input-pro px-1 py-2 rounded-lg text-center text-sm font-bold text-gray-300 w-full bg-[#090F1C] border border-gray-700 focus:border-indigo-500 shadow-inner">
+                    <input type="number" v-model="cfg.q1" @input="saveAndFetch" placeholder=".1" class="input-pro px-1 py-2 rounded-lg text-center text-sm font-bold text-emerald-400 w-full bg-[#090F1C] border border-gray-700 focus:border-indigo-500 shadow-inner">
+                    <input type="number" v-model="cfg.q2" @input="saveAndFetch" placeholder=".2" class="input-pro px-1 py-2 rounded-lg text-center text-sm font-bold text-cyan-400 w-full bg-[#090F1C] border border-gray-700 focus:border-indigo-500 shadow-inner">
+                    <input type="number" v-model="cfg.q3" @input="saveAndFetch" placeholder=".3" class="input-pro px-1 py-2 rounded-lg text-center text-sm font-bold text-purple-400 w-full bg-[#090F1C] border border-gray-700 focus:border-indigo-500 shadow-inner">
+                    <input type="number" v-model="cfg.q4" @input="saveAndFetch" placeholder=".4" class="input-pro px-1 py-2 rounded-lg text-center text-sm font-bold text-yellow-400 w-full bg-[#090F1C] border border-gray-700 focus:border-indigo-500 shadow-inner">
+                </div>
+            </div>
+
+            <!-- BUYING SECTION -->
+            <div class="border-t border-gray-700/50 pt-5 mb-5">
+                <div class="flex justify-between items-center mb-3">
+                    <p class="text-xs font-bold text-cyan-400 flex items-center gap-2">
+                        <i :data-lucide="cfg.use_multi_consumables ? 'shopping-basket' : 'shopping-cart'" class="w-4 h-4"></i>
+                        <span>{{ cfg.use_multi_consumables ? 'Buy Farming Mats (Optimal Yield City)' : 'Buy Raw Material (Gathering City)' }}</span>
+                    </p>
+                    <label v-if="!cfg.use_multi_consumables && !cfg.use_refine_only" class="flex items-center gap-2 text-[10px] font-black cursor-pointer transition-all bg-black/40 px-3 py-1.5 rounded-full border shadow-inner group" :class="cfg.do_refine !== false ? 'text-emerald-400 border-emerald-900/50 hover:bg-emerald-900/30' : 'text-gray-500 border-gray-800 hover:text-gray-300'">
+                        <input type="checkbox" v-model="cfg.do_refine" @change="saveAndFetch" class="hidden">
+                        <span :class="cfg.do_refine !== false ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-gray-600'" class="w-1.5 h-1.5 rounded-full transition-all duration-300 group-hover:scale-125"></span>
+                        <span>{{ cfg.do_refine !== false ? 'REFINE ON' : 'REFINE OFF' }}</span>
+                    </label>
+                    <label v-if="cfg.use_multi_consumables" class="flex items-center gap-2 text-[10px] font-black cursor-pointer transition-all bg-black/40 px-3 py-1.5 rounded-full border shadow-inner group" :class="cfg.use_multi_farming !== false ? 'text-emerald-400 border-emerald-900/50 hover:bg-emerald-900/30' : 'text-gray-500 border-gray-800 hover:text-gray-300'">
+                        <input type="checkbox" v-model="cfg.use_multi_farming" @change="saveAndFetch" class="hidden">
+                        <span :class="cfg.use_multi_farming !== false ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-gray-600'" class="w-1.5 h-1.5 rounded-full transition-all duration-300 group-hover:scale-125"></span>
+                        <span>{{ cfg.use_multi_farming !== false ? 'MULTI ON' : 'MULTI OFF' }}</span>
+                    </label>
+                </div>
+
+                <!-- FARMING FALLBACKS (ONLY IN CONSUMABLE MODE) -->
+                <div v-if="cfg.use_multi_consumables && cfg.use_multi_farming !== false" class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <div v-for="(city, cat) in cfg.farming_buy_cities" :key="'fbc'+cat">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1.5 flex items-center gap-1.5">
+                            <i v-if="cat === 'crops'" data-lucide="sprout" class="w-3 h-3 text-amber-500"></i>
+                            <i v-if="cat === 'herbs'" data-lucide="leaf" class="w-3 h-3 text-emerald-500"></i>
+                            <i v-if="cat === 'meat'" data-lucide="drumstick" class="w-3 h-3 text-rose-500"></i>
+                            <i v-if="cat === 'dairy'" data-lucide="milk" class="w-3 h-3 text-yellow-400"></i>
+                            <i v-if="cat === 'intermediate'" data-lucide="sandwich" class="w-3 h-3 text-orange-400"></i>
+                            {{ cat }}
+                        </span>
+                        <select v-model="cfg.farming_buy_cities[cat]" @change="saveAndFetch" class="input-pro px-2 py-2 w-full rounded-lg text-xs font-bold bg-[#090F1C] border border-amber-900/30 text-white focus:border-amber-500 shadow-inner">
+                            <option v-for="city in ALL_ROYAL_CITIES" :value="city">{{ city }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div v-else-if="cfg.use_multi_consumables" class="bg-black/20 border border-gray-800 rounded-xl p-4">
+                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2 mb-3">
+                        <i data-lucide="shopping-basket" class="w-4 h-4 text-emerald-400"></i> Buy All Mats At (Base City)
+                    </span>
+                    <select v-model="cfg.buy_city" @change="saveAndFetch" class="w-full bg-[#050912] border border-gray-700 text-gray-300 text-xs rounded-lg p-2.5 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-bold">
+                        <option v-for="city in ALL_ROYAL_CITIES" :key="city" :value="city">{{ city }}</option>
+                    </select>
+                </div>
+
+                <!-- RAW MATERIALS (REFINING MODE) -->
+                <div v-else class="grid grid-cols-2 md:grid-cols-5 gap-3 transition-opacity duration-300" :class="(cfg.do_refine === false && !cfg.use_refine_only) ? 'opacity-30 pointer-events-none grayscale' : ''">
+                    <div v-for="rmat in ['fiber','hide','ore','wood','stone']" :key="'rc'+rmat">
+                        <span class="text-[11px] font-bold text-gray-400 uppercase block mb-1.5 flex items-center gap-1.5">
+                            <i v-if="rmat==='fiber'" data-lucide="sprout" class="w-3 h-3 text-emerald-400"></i>
+                            <i v-if="rmat==='hide'" data-lucide="paw-print" class="w-3 h-3 text-orange-400"></i>
+                            <i v-if="rmat==='ore'" data-lucide="mountain" class="w-3 h-3 text-cyan-400"></i>
+                            <i v-if="rmat==='wood'" data-lucide="trees" class="w-3 h-3 text-amber-600"></i>
+                            <i v-if="rmat==='stone'" data-lucide="pickaxe" class="w-3 h-3 text-gray-400"></i>
+                            {{ rmat }}
+                        </span>
+                        <select v-model="cfg.raw_cities[rmat]" @change="saveAndFetch" class="input-pro px-2 py-2 w-full rounded-lg text-xs font-bold bg-[#090F1C] border border-cyan-900/50 text-white focus:border-cyan-400 shadow-inner">
+                            <option v-for="city in ALL_ROYAL_CITIES" :value="city">{{ city }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MID-STAGE SECTION (REFINE OR HUB SETUP) -->
+            <div class="border-t border-gray-700/50 pt-5 mb-5">
+                <div class="flex justify-between items-center mb-3">
+                    <p class="text-xs font-bold flex items-center gap-2" :class="cfg.use_multi_consumables ? 'text-emerald-400' : 'text-rose-400'">
+                        <i :data-lucide="cfg.use_multi_consumables ? 'utensils-crossed' : 'factory'" class="w-4 h-4"></i>
+                        <span>{{ cfg.use_multi_consumables ? 'Primary Production Hubs' : 'Refine City Per Material' }}</span>
+                        <span class="text-[9px] px-1.5 py-0.5 rounded uppercase" :class="cfg.use_multi_consumables ? 'bg-emerald-950 text-emerald-300' : 'bg-rose-950 text-rose-300'">AUTO-DETECT BONUS</span>
+                    </p>
+                    <label v-if="!cfg.use_multi_consumables" class="flex items-center gap-2 text-[10px] font-black cursor-pointer transition-all bg-black/40 px-3 py-1.5 rounded-full border shadow-inner group" :class="(cfg.use_refine_only ? cfg.multi_refine_only_mode : cfg.use_multi_refine) ? 'text-rose-400 border-rose-900/50 hover:bg-rose-900/30' : 'text-gray-500 border-gray-800 hover:text-gray-300'">
+                        <input type="checkbox" v-model="cfg[cfg.use_refine_only ? 'multi_refine_only_mode' : 'use_multi_refine']" @change="saveAndFetch" class="hidden">
+                        <span :class="(cfg.use_refine_only ? cfg.multi_refine_only_mode : cfg.use_multi_refine) ? 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]' : 'bg-gray-600'" class="w-1.5 h-1.5 rounded-full transition-all duration-300 group-hover:scale-125"></span>
+                        <span>{{ (cfg.use_refine_only ? cfg.multi_refine_only_mode : cfg.use_multi_refine) ? 'MULTI ON' : 'MULTI OFF' }}</span>
+                    </label>
+                    <label v-if="cfg.use_multi_consumables" class="flex items-center gap-2 text-[10px] font-black cursor-pointer transition-all bg-black/40 px-3 py-1.5 rounded-full border shadow-inner group" :class="cfg.use_multi_cooking !== false ? 'text-emerald-400 border-emerald-900/50 hover:bg-emerald-900/30' : 'text-gray-500 border-gray-800 hover:text-gray-300'">
+                        <input type="checkbox" v-model="cfg.use_multi_cooking" @change="saveAndFetch" class="hidden">
+                        <span :class="cfg.use_multi_cooking !== false ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-gray-600'" class="w-1.5 h-1.5 rounded-full transition-all duration-300 group-hover:scale-125"></span>
+                        <span>{{ cfg.use_multi_cooking !== false ? 'MULTI ON' : 'MULTI OFF' }}</span>
+                    </label>
+                </div>
+                
+                <!-- CONSUMABLE HUBS -->
+                <div v-if="cfg.use_multi_consumables && cfg.use_multi_cooking !== false" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-black/20 border border-gray-800 rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                                <i data-lucide="utensils-crossed" class="w-4 h-4 text-emerald-400"></i> Primary Kitchen (Cooking)
+                            </span>
+                            <span class="text-[9px] font-bold text-emerald-400/60 bg-emerald-400/10 px-2 py-0.5 rounded uppercase">Caerleon Bonus</span>
+                        </div>
+                        <select v-model="cfg.cooking_city" @change="saveAndFetch" class="w-full bg-[#050912] border border-gray-700 text-gray-300 text-xs rounded-lg p-2.5 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-bold">
+                            <option v-for="city in ALL_ROYAL_CITIES" :key="city" :value="city">{{ city }}</option>
+                        </select>
+                    </div>
+                    <div class="bg-black/20 border border-gray-800 rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                                <i data-lucide="flask-conical" class="w-4 h-4 text-blue-400"></i> Primary Laboratory (Alchemy)
+                            </span>
+                            <span class="text-[9px] font-bold text-blue-400/60 bg-blue-400/10 px-2 py-0.5 rounded uppercase">Brecilien Bonus</span>
+                        </div>
+                        <select v-model="cfg.alchemy_city" @change="saveAndFetch" class="w-full bg-[#050912] border border-gray-700 text-gray-300 text-xs rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500 transition-all font-bold">
+                            <option v-for="city in ALL_ROYAL_CITIES" :key="city" :value="city">{{ city }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- REFINING CITIES -->
+                <div v-else-if="cfg.use_refine_only ? cfg.multi_refine_only_mode : cfg.use_multi_refine" class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <div v-for="mat in ['cloth','leather','steel','plank','block']" :key="'rc2'+mat">
+                        <span class="text-[11px] font-bold text-gray-400 uppercase block mb-1.5 flex items-center gap-1.5">
+                            <i v-if="mat==='cloth'" data-lucide="scroll" class="w-3 h-3 text-emerald-400"></i>
+                            <i v-if="mat==='leather'" data-lucide="layers" class="w-3 h-3 text-orange-400"></i>
+                            <i v-if="mat==='steel'" data-lucide="shield" class="w-3 h-3 text-cyan-400"></i>
+                            <i v-if="mat==='plank'" data-lucide="box" class="w-3 h-3 text-amber-600"></i>
+                            <i v-if="mat==='block'" data-lucide="cuboid" class="w-3 h-3 text-gray-400"></i>
+                            {{ mat }}
+                        </span>
+                        <select v-model="cfg.refine_cities[mat]" @change="saveAndFetch" class="input-pro px-2 py-2 w-full rounded-lg text-xs font-bold bg-[#090F1C] border border-rose-900/50 text-white focus:border-rose-400 shadow-inner">
+                            <option v-for="city in ALL_ROYAL_CITIES" :value="city">{{ city }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div v-else class="bg-rose-950/20 border border-rose-900/30 rounded p-3 text-center flex flex-col items-center gap-2">
+                    <div class="flex gap-4 opacity-40">
+                        <i data-lucide="scroll" class="w-4 h-4 text-emerald-400"></i>
+                        <i data-lucide="layers" class="w-4 h-4 text-orange-400"></i>
+                        <i data-lucide="shield" class="w-4 h-4 text-cyan-400"></i>
+                        <i data-lucide="box" class="w-4 h-4 text-amber-600"></i>
+                    </div>
+                    <p class="text-xs text-rose-400/70 italic">Multi-Refine OFF. Semua proses Refine mengikuti Base Crafting City.</p>
+                </div>
+            </div>
+
+            <!-- CRAFTING & MARKET SECTION -->
+            <div v-if="!cfg.use_refine_only" class="border-t border-gray-700/50 pt-5 mb-5">
+                <div class="flex justify-between items-center mb-3">
+                    <p class="text-xs font-bold text-emerald-400 flex items-center gap-2">
+                        <i :data-lucide="cfg.use_multi_consumables ? 'package-check' : 'hammer'" class="w-4 h-4"></i>
+                        <span>{{ cfg.use_multi_consumables ? 'Market Distribution' : 'Crafting & Market Route' }}</span>
+                        <span class="text-[9px] bg-emerald-950 text-emerald-300 px-1.5 py-0.5 rounded uppercase">AUTO-DETECT BONUS</span>
+                    </p>
+                    <label v-if="!cfg.use_multi_consumables" class="flex items-center gap-2 text-[10px] font-black cursor-pointer transition-all bg-black/40 px-3 py-1.5 rounded-full border shadow-inner group" :class="cfg.do_craft !== false ? 'text-emerald-400 border-emerald-900/50 hover:bg-emerald-900/30' : 'text-gray-500 border-gray-800 hover:text-gray-300'">
+                        <input type="checkbox" v-model="cfg.do_craft" @change="saveAndFetch" class="hidden">
+                        <span :class="cfg.do_craft !== false ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-gray-600'" class="w-1.5 h-1.5 rounded-full transition-all duration-300 group-hover:scale-125"></span>
+                        <span>{{ cfg.do_craft !== false ? 'CRAFT ON' : 'CRAFT OFF' }}</span>
+                    </label>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div v-if="!cfg.use_multi_consumables || cfg.use_multi_cooking === false">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1.5">Craft {{ cfg.use_multi_consumables ? 'Consumables' : 'Gears' }} At (Base City)</span>
+                        <div v-if="cfg.use_multi_consumables || !cfg.use_multi_refine">
+                            <select v-model="cfg.craft_city" @change="saveAndFetch" class="input-pro px-3 py-2 w-full rounded-lg text-xs font-black bg-[#090F1C] border border-blue-900/50 text-blue-300 focus:border-blue-400 shadow-inner">
+                                <option v-for="city in ALL_ROYAL_CITIES" :value="city">{{ city }}</option>
+                            </select>
+                        </div>
+                        <div v-else class="bg-black/40 border border-gray-800 rounded px-3 py-2 text-xs font-bold text-gray-600 italic text-center">
+                            -- OFF (Multi-Refine ON) --
+                        </div>
+                    </div>
+                    <div :class="(cfg.use_multi_consumables && cfg.use_multi_cooking !== false) ? 'col-span-2' : ''">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1.5">Sell {{ cfg.use_multi_consumables ? 'Consumables' : 'Gears' }} At (Market)</span>
+                        <select v-model="cfg.sell_city" @change="saveAndFetch" class="input-pro px-3 py-2 w-full rounded-lg text-xs font-black bg-[#090F1C] border border-emerald-900/50 text-emerald-300 focus:border-emerald-400 shadow-inner">
+                            <option v-for="city in ALL_SELL_CITIES" :value="city">{{ city }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700/50 pt-5">
+                <p class="text-xs font-bold text-indigo-400 mb-3">Logistics Route</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <span class="text-[11px] font-bold text-gray-400 uppercase block mb-1.5">Route From</span>
+                        <select v-model="cfg.route_from" @change="saveAndFetch" class="input-pro px-3 py-2 w-full rounded-lg text-xs font-bold bg-[#090F1C] border border-gray-700 text-white focus:border-indigo-500 shadow-inner">
+                            <option v-for="c in ALL_ROYAL_CITIES" :value="c">{{c}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold text-gray-400 uppercase block mb-1.5">Route To</span>
+                        <select v-model="cfg.route_to" @change="saveAndFetch" class="input-pro px-3 py-2 w-full rounded-lg text-xs font-bold bg-[#090F1C] border border-gray-700 text-white focus:border-indigo-500 shadow-inner">
+                            <option v-for="c in availableDestinations" :value="c">{{c}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="data" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="glass-card p-5 flex flex-col justify-between gap-3 border border-gray-800/60 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-emerald-500/30 transition-colors">
+            <div><p class="text-xs font-black text-emerald-500 uppercase tracking-widest mb-1">Max Carry Load</p></div>
+            <div>
+                <span class="text-3xl font-black text-emerald-400 font-mono drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]">{{ data.weight_data.max_load.toLocaleString() }}</span><span class="text-sm font-bold text-gray-500 ml-2">kg</span>
+                <div class="w-full bg-[#090F1C] rounded-full h-2 overflow-hidden mt-3 border border-gray-800"><div class="h-full bg-emerald-500 shadow-[0_0_8px_#10b981]" style="width:100%"></div></div>
+            </div>
+        </div>
+        
+        <div class="glass-card p-5 flex flex-col justify-between gap-3 border border-gray-800/60 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-colors" :class="dynamicPeakWeight.over ? 'border-rose-500/50' : 'hover:border-amber-500/30'">
+            <div class="flex justify-between items-center">
+                <p class="text-xs font-black uppercase tracking-widest mb-1" :class="dynamicPeakWeight.over ? 'text-rose-500' : 'text-amber-400'">Sisa Peak Route Load</p>
+                <p class="text-sm font-black transition-all bg-black/40 px-2 py-0.5 rounded border" :class="dynamicPeakWeight.over ? 'text-rose-400 border-rose-900' : 'text-amber-300 border-amber-900/50'">{{ dynamicPeakWeight.pct }}%</p>
+            </div>
+            <div>
+                <span class="text-3xl font-black font-mono transition-all" :class="dynamicPeakWeight.over ? 'text-rose-500 drop-shadow-[0_0_10px_rgba(244,63,94,0.6)]' : 'text-amber-300 drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]'">{{ dynamicPeakWeight.kg.toLocaleString(undefined, {minimumFractionDigits:1, maximumFractionDigits:1}) }}</span><span class="text-sm font-bold text-gray-500 ml-2">kg</span>
+                <div class="w-full bg-[#090F1C] rounded-full h-2 overflow-hidden mt-3 border border-gray-800">
+                    <div class="h-full rounded-full transition-all duration-500" :class="dynamicPeakWeight.over ? 'bg-rose-500 shadow-[0_0_8px_#f43f5e]' : 'bg-amber-400 shadow-[0_0_8px_#fbbf24]'" :style="{ width: Math.min(dynamicPeakWeight.pct, 100) + '%' }"></div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="(cfg.focus_refine && cfg.do_refine !== false) || (cfg.focus_craft && cfg.do_craft !== false)" class="glass-card p-5 flex flex-col justify-between gap-3 border border-gray-800/60 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-blue-500/30 transition-colors">
+            <div class="flex justify-between items-start">
+                <p class="text-xs font-black text-blue-400 uppercase tracking-widest mb-1">Focus Points</p>
+                <p class="text-[10px] font-bold text-gray-500 bg-black/40 px-2 py-0.5 rounded border border-gray-800">Used: <span class="text-gray-300 font-mono">{{ data.focus_data.used.toLocaleString() }}</span></p>
+            </div>
+            <div>
+                <span class="text-3xl font-black font-mono" :class="data.focus_data.is_overcap ? 'text-rose-500 drop-shadow-[0_0_10px_rgba(244,63,94,0.6)]' : 'text-blue-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]'">{{ data.focus_data.remaining.toLocaleString() }}</span>
+                <div class="w-full bg-[#090F1C] rounded-full h-2 overflow-hidden mt-3 border border-gray-800">
+                    <div class="h-full rounded-full transition-all duration-500" :class="data.focus_data.is_overcap ? 'bg-rose-500 shadow-[0_0_8px_#f43f5e]' : 'bg-blue-500 shadow-[0_0_8px_#3b82f6]'" :style="{ width: Math.min((data.focus_data.used/30000)*100, 100) + '%' }"></div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="!cfg.use_refine_only && !cfg.use_multi_consumables" class="glass-card p-5 flex flex-col gap-3 border border-gray-800/60 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-purple-500/30 transition-colors">
+            <p class="text-xs font-black text-purple-400 uppercase tracking-widest mb-1 border-b border-gray-800/50 pb-2">Total Journals Needed</p>
+            <div class="space-y-2 flex-grow overflow-y-auto max-h-[120px] pr-1 custom-scrollbar">
+                <div v-if="Object.keys(data.journals).length > 0">
+                    <div v-for="(qty, jt) in data.journals" :key="jt" class="flex justify-between items-center py-1.5 border-b border-gray-800/50 last:border-0">
+                        <span class="text-xs font-bold text-gray-400">{{ jt }}</span>
+                        <span class="font-mono font-black text-purple-300 text-sm">{{ qty.toLocaleString() }}</span>
+                    </div>
+                </div>
+                <div v-else class="flex h-full items-center justify-center">
+                    <p class="text-[10px] text-gray-500 italic text-center uppercase tracking-widest mt-2">Tidak butuh jurnal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="data && data.logistics && data.logistics.global_shopping_html" class="glass-card p-6 mb-8 border-l-4 border-l-cyan-500 shadow-[0_8px_30px_rgba(0,0,0,0.3)] bg-gradient-to-r from-[#0B1120] to-[#090F1C]">
+        <h2 class="text-sm font-black text-cyan-400 uppercase tracking-widest mb-5 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4]"></span> Global Shopping List</h2>
+        <div v-html="data.logistics.global_shopping_html"></div>
+    </div>
+
+    <div v-if="data" class="glass-card p-8 mb-8 border-t-4 border-t-emerald-500 shadow-[0_10px_40px_rgba(0,0,0,0.4)] bg-[#0B1120]">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 mb-8 border-b border-gray-800 pb-5">
+            <h2 class="text-xl font-black text-emerald-400 uppercase tracking-widest drop-shadow-[0_0_8px_rgba(16,185,129,0.3)] flex items-center gap-3">
+                <i data-lucide="wallet" class="w-6 h-6"></i> Financial Report
+            </h2>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 w-full sm:w-auto">
+                <label class="flex items-center gap-2 text-sm font-bold text-rose-400 cursor-pointer hover:text-rose-300 transition-colors">
+                    <input type="checkbox" v-model="cfg.premium_tax" @change="saveAndFetch" class="accent-rose-500 w-4 h-4"> Premium Tax (4%)
+                </label>
+                <button @click="exportToLogs" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white px-5 py-2 rounded-lg font-black text-sm transition-all shadow-[0_0_15px_rgba(79,70,229,0.4)] hover:shadow-[0_0_25px_rgba(79,70,229,0.6)] flex justify-center items-center gap-2 transform hover:-translate-y-0.5">
+                    <i data-lucide="save" class="w-4 h-4"></i> SAVE TO LOGS
+                </button>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-[#090F1C] rounded-xl p-6 border border-gray-800/80 shadow-inner">
+                <h4 class="text-xs font-black text-rose-400 mb-5 uppercase tracking-widest border-b border-gray-800 pb-3">Capital & Costs</h4>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center"><span class="text-sm font-bold text-gray-400">{{ cfg.use_multi_consumables ? 'Farming Ingredients' : 'Raw / Under Materials' }}</span><span class="font-mono font-bold text-rose-400 bg-rose-950/20 px-2 py-1 rounded">− {{ data.financial.cost_raw_mats.toLocaleString() }}</span></div>
+                    <div v-if="!cfg.use_multi_consumables" class="flex justify-between items-center"><span class="text-sm font-bold text-gray-400">Station Fee (Refine)</span><span class="font-mono font-bold text-rose-400 bg-rose-950/20 px-2 py-1 rounded">− {{ data.financial.fee_refine.toLocaleString() }}</span></div>
+                    <div v-if="!cfg.use_refine_only" class="flex justify-between items-center"><span class="text-sm font-bold text-gray-400">Station Fee ({{ cfg.use_multi_consumables ? 'Cooking' : 'Craft' }})</span><span class="font-mono font-bold text-rose-400 bg-rose-950/20 px-2 py-1 rounded">− {{ data.financial.fee_craft.toLocaleString() }}</span></div>
+                    <div v-if="!cfg.use_multi_consumables && !cfg.use_refine_only" class="flex justify-between items-center"><span class="text-sm font-bold text-gray-400">Empty Journals</span><span class="font-mono font-bold text-rose-400 bg-rose-950/20 px-2 py-1 rounded">− {{ data.financial.cost_journals.toLocaleString() }}</span></div>
+                    
+                    <div class="flex justify-between items-center text-lg font-black border-t border-gray-700/50 pt-4 mt-2">
+                        <span class="text-gray-300 uppercase tracking-widest text-sm">Total Capital</span>
+                        <span class="font-mono text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.4)]">− {{ data.financial.total_capital.toLocaleString() }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-b from-[#090F1C] to-[#061814] rounded-xl p-6 border border-emerald-900/50 shadow-[inset_0_0_20px_rgba(16,185,129,0.05)]">
+                <h4 class="text-xs font-black text-emerald-500 mb-5 uppercase tracking-widest border-b border-emerald-900/50 pb-3">Net Profit</h4>
+                <div class="space-y-4">
+                    <div v-if="!cfg.use_multi_consumables" class="flex justify-between items-center"><span class="text-sm font-bold text-gray-400">Refining Stage</span><span class="font-mono font-bold px-2 py-1 rounded" :class="data.financial.profit_refine >= 0 ? 'text-emerald-400 bg-emerald-950/30' : 'text-rose-500 bg-rose-950/30'">{{ data.financial.profit_refine > 0 ? '+' : '' }}{{ data.financial.profit_refine.toLocaleString() }}</span></div>
+                    <div v-if="!cfg.use_refine_only" class="flex justify-between items-center"><span class="text-sm font-bold text-gray-400">{{ cfg.use_multi_consumables ? 'Net Margin (Profit)' : 'Crafting (BM)' }}</span><span class="font-mono font-bold px-2 py-1 rounded" :class="data.financial.profit_bm >= 0 ? 'text-emerald-400 bg-emerald-950/30' : 'text-rose-500 bg-rose-950/30'">{{ data.financial.profit_bm > 0 ? '+' : '' }}{{ data.financial.profit_bm.toLocaleString() }}</span></div>
+                    <div v-if="!cfg.use_multi_consumables && !cfg.use_refine_only" class="flex justify-between items-center"><span class="text-sm font-bold text-gray-400">Laborer Journals</span><span class="font-mono font-bold px-2 py-1 rounded" :class="data.financial.profit_journals >= 0 ? 'text-emerald-400 bg-emerald-950/30' : 'text-rose-500 bg-rose-950/30'">{{ data.financial.profit_journals > 0 ? '+' : '' }}{{ data.financial.profit_journals.toLocaleString() }}</span></div>
+                    
+                    <div class="flex justify-between items-center text-xl font-black border-t border-emerald-800/50 pt-4 mt-2">
+                        <span class="text-emerald-400 uppercase tracking-widest text-sm drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]">Grand Total</span>
+                        <span class="font-mono" :class="data.financial.grand_profit >= 0 ? 'text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.6)]' : 'text-rose-500 drop-shadow-[0_0_10px_rgba(244,63,94,0.6)]'">{{ data.financial.grand_profit > 0 ? '+' : '' }}{{ data.financial.grand_profit.toLocaleString() }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endraw %}

@@ -1,0 +1,31 @@
+{
+  "foods": {
+    "Goat Stew T4": {"tier": 4, "mats": {"raw_goat": 8, "turnip": 4, "bread": 4}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Mutton Stew T6": {"tier": 6, "mats": {"raw_mutton": 24, "cabbage": 12, "potato": 12}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Beef Stew T8": {"tier": 8, "mats": {"raw_beef": 72, "pumpkin": 36, "bread": 36}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Chicken Omelette T3": {"tier": 3, "mats": {"raw_chicken": 8, "wheat": 4, "chicken_egg": 2}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Goose Omelette T5": {"tier": 5, "mats": {"raw_goose": 24, "cabbage": 12, "goose_egg": 6}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Pork Omelette T7": {"tier": 7, "mats": {"raw_pork": 72, "corn": 36, "goose_egg": 18}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Wheat Soup T3": {"tier": 3, "mats": {"wheat": 48}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Cabbage Soup T5": {"tier": 5, "mats": {"cabbage": 144}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Turnip Salad T4": {"tier": 4, "mats": {"turnip": 24, "wheat": 24}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Beef Sandwich T8": {"tier": 8, "mats": {"raw_beef": 72, "butter": 36, "bread": 36}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Pork Pie T7": {"tier": 7, "mats": {"raw_pork": 72, "sheep_milk": 36, "flour": 36}, "yield": 10, "enchant_mat": "fish_sauce"},
+    "Roast Pork T7": {"tier": 7, "mats": {"raw_pork": 72, "sheep_milk": 18}, "yield": 10, "enchant_mat": "fish_sauce"}
+  },
+  "potions": {
+    "Minor Healing Potion T4": {"tier": 4, "mats": {"burdock": 24}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Healing Potion T6": {"tier": 6, "mats": {"foxglove": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Major Healing Potion T8": {"tier": 8, "mats": {"ghoul_yarrow": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Minor Energy Potion T4": {"tier": 4, "mats": {"agaric": 24}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Energy Potion T6": {"tier": 6, "mats": {"foxglove": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Major Energy Potion T8": {"tier": 8, "mats": {"ghoul_yarrow": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Minor Poison Potion T4": {"tier": 4, "mats": {"burdock": 24}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Poison Potion T6": {"tier": 6, "mats": {"foxglove": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Major Poison Potion T8": {"tier": 8, "mats": {"ghoul_yarrow": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Minor Resistance Potion T4": {"tier": 4, "mats": {"agaric": 24}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Resistance Potion T6": {"tier": 6, "mats": {"foxglove": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Major Resistance Potion T8": {"tier": 8, "mats": {"ghoul_yarrow": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"},
+    "Invisibility Potion T8": {"tier": 8, "mats": {"ghoul_yarrow": 72, "goose_egg": 18, "potato_schnapps": 18}, "yield": 5, "enchant_mat": "arcane_extract"}
+  }
+}

@@ -1,0 +1,274 @@
+{% raw %}
+<!-- 🟩 SECTION 1: MATERIALS -->
+            <div v-if="activePriceTab === 'materials'" class="animate-in fade-in duration-500 w-full overflow-x-auto pb-4">
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-10 min-w-full lg:min-w-[700px]">
+                    <div class="bg-gray-900/40 p-4 rounded-xl border border-gray-800/50 shadow-inner">
+                        <h3 class="text-xs font-black text-cyan-400 uppercase tracking-widest mb-4 border-b border-gray-700/50 pb-3">RAW Buy (T{{cfg.tier}}) — per Gather City</h3>
+                        <template v-for="mat in MAT_LIST" :key="'raw'+mat">
+                            <div class="mb-4" v-if="p_buy_mat[mat]?.raw?.[ RAW_OF[mat] ] !== undefined">
+                                <div class="flex items-center justify-between mb-2 px-1">
+                                    <span class="text-xs font-bold text-gray-400 uppercase">{{ RAW_OF[mat] }}</span>
+                                    <span class="text-[10px] text-cyan-600 font-bold tracking-wider">@ {{cfg.raw_cities?.[ RAW_OF[mat] ]}}</span>
+                                </div>
+                                <div class="grid gap-1 font-mono" :class="RAW_OF[mat] === 'stone' ? 'grid-cols-4' : 'grid-cols-5'">
+                                    <template v-for="e in ['.0','.1','.2','.3','.4']" :key="e">
+                                        <div v-if="!(RAW_OF[mat] === 'stone' && e === '.4')" class="flex flex-col gap-1 items-center p-1 rounded-lg border border-[#1E2D45] bg-[#090F1C] hover:border-indigo-500/30 transition-colors">
+                                            <input type="number" v-model="p_buy_mat[mat].raw[RAW_OF[mat]][e]" @change="savePricesAndFetch(cfg.raw_cities[RAW_OF[mat]], tierKey, 'raw_' + RAW_OF[mat], e)" :placeholder="e" class="w-full p-1 text-[11px] font-bold text-center rounded bg-black/60 border border-gray-700 focus:outline-none focus:border-indigo-500 transition-colors" :class="[e==='.0'?'text-gray-300':e==='.1'?'text-emerald-400':e==='.2'?'text-cyan-400':e==='.3'?'text-purple-400':'text-yellow-400']">
+                                            <div class="flex items-center gap-1 bg-black/40 px-1 py-0.5 rounded-full border border-gray-800/50 w-full justify-center">
+                                                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" :class="getItemFreshnessTextClass(cfg.raw_cities[RAW_OF[mat]], tierKey, 'raw_' + RAW_OF[mat], e).replace('text-', 'bg-')"></div>
+                                                <span class="text-[9px] text-gray-500">{{ getItemFreshnessTime(cfg.raw_cities[RAW_OF[mat]], tierKey, 'raw_' + RAW_OF[mat], e) }}</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="bg-gray-900/40 p-4 rounded-xl border border-gray-800/50 shadow-inner">
+                        <h3 class="text-xs font-black text-rose-400 uppercase tracking-widest mb-4 border-b border-gray-700/50 pb-3">Under-Refine Buy (T{{cfg.tier > 3 ? cfg.tier-1 : 'N/A'}})</h3>
+                        <template v-for="mat in MAT_LIST" :key="'und'+mat">
+                            <div class="mb-4" v-if="p_buy_mat[mat]?.under?.[mat] !== undefined">
+                                <div class="flex items-center justify-between mb-2 px-1">
+                                    <span class="text-xs font-bold text-gray-400 uppercase">{{ mat }}</span>
+                                    <span class="text-[10px] text-rose-600 font-bold tracking-wider">@ {{ getRefineCity(mat) }}</span>
+                                </div>
+                                <div class="grid gap-1 font-mono" :class="(cfg.tier === 4 || mat === 'block') ? 'grid-cols-1' : 'grid-cols-5'">
+                                    <template v-if="cfg.tier === 4 || mat === 'block'">
+                                        <div class="flex flex-col gap-1 items-center p-1 rounded-lg border border-[#1E2D45] bg-[#090F1C] hover:border-indigo-500/30 transition-colors">
+                                            <input type="number" v-model="p_buy_mat[mat].under[mat]['.0']" @change="savePricesAndFetch(getRefineCity(mat), tierKey, 'under_' + mat, '.0')" :placeholder="mat === 'block' ? 'Flat Only' : 'T3 Flat Price'" class="w-full p-1 text-[11px] font-bold text-center rounded bg-black/60 border border-gray-700 focus:outline-none focus:border-indigo-500 text-gray-300 transition-colors">
+                                            <div class="flex items-center gap-1 bg-black/40 px-1 py-0.5 rounded-full border border-gray-800/50 w-full justify-center">
+                                                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" :class="getItemFreshnessTextClass(getRefineCity(mat), tierKey, 'under_' + mat, '.0').replace('text-', 'bg-')"></div>
+                                                <span class="text-[10px] text-gray-500">{{ getItemFreshnessTime(getRefineCity(mat), tierKey, 'under_' + mat, '.0') }}</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div v-for="e in ['.0','.1','.2','.3','.4']" :key="e" class="flex flex-col gap-1 items-center p-1 rounded-lg border border-[#1E2D45] bg-[#090F1C] hover:border-indigo-500/30 transition-colors">
+                                            <input type="number" v-model="p_buy_mat[mat].under[mat][e]" @change="savePricesAndFetch(getRefineCity(mat), tierKey, 'under_' + mat, e)" :placeholder="e" class="w-full p-1 text-[11px] font-bold text-center rounded bg-black/60 border border-gray-700 focus:outline-none focus:border-indigo-500 transition-colors" :class="[e==='.0'?'text-gray-300':e==='.1'?'text-emerald-400':e==='.2'?'text-cyan-400':e==='.3'?'text-purple-400':'text-yellow-400']">
+                                            <div class="flex items-center gap-1 bg-black/40 px-1 py-0.5 rounded-full border border-gray-800/50 w-full justify-center">
+                                                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" :class="getItemFreshnessTextClass(getRefineCity(mat), tierKey, 'under_' + mat, e).replace('text-', 'bg-')"></div>
+                                                <span class="text-[9px] text-gray-500">{{ getItemFreshnessTime(getRefineCity(mat), tierKey, 'under_' + mat, e) }}</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="bg-gray-900/40 p-4 rounded-xl border border-gray-800/50 shadow-inner">
+                        <h3 class="text-xs font-black text-yellow-400 uppercase tracking-widest mb-4 border-b border-gray-700/50 pb-3">Refined Sell/Buy (T{{cfg.tier}})</h3>
+                        <template v-for="mat in MAT_LIST" :key="'ref'+mat">
+                            <div class="mb-4" v-if="p_buy_mat[mat]?.ref?.[mat] !== undefined">
+                                <div class="flex items-center justify-between mb-2 px-1">
+                                    <span class="text-xs font-bold text-gray-400 uppercase">{{ mat }}</span>
+                                    <span class="text-[10px] text-yellow-600 font-bold tracking-wider">@ {{ getRefineCity(mat) }}</span>
+                                </div>
+                                <div class="grid gap-1 font-mono" :class="mat === 'block' ? 'grid-cols-1' : 'grid-cols-5'">
+                                    <template v-if="mat === 'block'">
+                                        <div class="flex flex-col gap-1 items-center p-1 rounded-lg border border-[#1E2D45] bg-[#090F1C] hover:border-indigo-500/30 transition-colors">
+                                            <input type="number" v-model="p_buy_mat[mat].ref[mat]['.0']" @change="savePricesAndFetch(getRefineCity(mat), tierKey, 'ref_' + mat, '.0')" placeholder="Flat Only" class="w-full p-1 text-[11px] font-bold text-center rounded bg-black/60 border border-gray-700 focus:outline-none focus:border-indigo-500 text-gray-300 transition-colors">
+                                            <div class="flex items-center gap-1 bg-black/40 px-1 py-0.5 rounded-full border border-gray-800/50 w-full justify-center">
+                                                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" :class="getItemFreshnessTextClass(getRefineCity(mat), tierKey, 'ref_' + mat, '.0').replace('text-', 'bg-')"></div>
+                                                <span class="text-[9px] text-gray-500">{{ getItemFreshnessTime(getRefineCity(mat), tierKey, 'ref_' + mat, '.0') }}</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div v-for="e in ['.0','.1','.2','.3','.4']" :key="e" class="flex flex-col gap-1 items-center p-1 rounded-lg border border-[#1E2D45] bg-[#090F1C] hover:border-indigo-500/30 transition-colors">
+                                            <input type="number" v-model="p_buy_mat[mat].ref[mat][e]" @change="savePricesAndFetch(getRefineCity(mat), tierKey, 'ref_' + mat, e)" :placeholder="e" class="w-full p-1 text-[11px] font-bold text-center rounded bg-black/60 border border-gray-700 focus:outline-none focus:border-indigo-500 transition-colors" :class="[e==='.0'?'text-gray-300':e==='.1'?'text-emerald-400':e==='.2'?'text-cyan-400':e==='.3'?'text-purple-400':'text-yellow-400']">
+                                            <div class="flex items-center gap-1 bg-black/40 px-1 py-0.5 rounded-full border border-gray-800/50 w-full justify-center">
+                                                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" :class="getItemFreshnessTextClass(getRefineCity(mat), tierKey, 'ref_' + mat, e).replace('text-', 'bg-')"></div>
+                                                <span class="text-[9px] text-gray-500">{{ getItemFreshnessTime(getRefineCity(mat), tierKey, 'ref_' + mat, e) }}</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-6">
+                    <div class="data-box p-6 border border-orange-900/40 rounded-xl bg-gray-900/40 shadow-inner">
+                        <h3 class="text-sm font-black text-orange-400 uppercase tracking-widest mb-5 border-b border-gray-800/50 pb-3">Artifact Fragments (T{{cfg.tier}})</h3>
+
+                        <div class="mb-5">
+                            <div class="text-xs font-bold text-orange-300 uppercase mb-2 flex justify-between items-center pr-1">
+                                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div> <span>Rune</span></div>
+                                <select v-model="cfg.frag_cities.rune" @change="saveAndFetch" class="input-pro py-0.5 px-2 text-[10px] rounded bg-[#090F1C] border border-gray-700 text-amber-300 outline-none">
+                                    <option v-for="c in ALL_ROYAL_CITIES" :key="c" :value="c">{{ c }}</option>
+                                </select>
+                            </div>
+                            <div class="flex gap-2 font-mono">
+                                <div class="w-full flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-orange-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(fragmentPrices.rune.city, tierKey, 'frag_rune', '0')">
+                                    <span class="text-xs text-gray-500 mr-3 uppercase font-bold tracking-wider">Buy</span>
+                                    <input type="number" v-model="pricesData[fragmentPrices.rune.city][tierKey].fragments.rune" @change="savePricesAndFetch(fragmentPrices.rune.city, tierKey, 'frag_rune', '0')" class="bg-transparent text-white w-full py-2.5 text-right focus:outline-none text-sm font-bold">
+                                    <span class="text-[10px] text-gray-500 ml-3 w-12 text-right" :class="getItemFreshnessTextClass(fragmentPrices.rune.city, tierKey, 'frag_rune', '0')">{{ getItemFreshnessTime(fragmentPrices.rune.city, tierKey, 'frag_rune', '0') }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <div class="text-xs font-bold text-orange-400 uppercase mb-2 flex justify-between items-center pr-1">
+                                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]"></div> <span>Soul</span></div>
+                                <select v-model="cfg.frag_cities.soul" @change="saveAndFetch" class="input-pro py-0.5 px-2 text-[10px] rounded bg-[#090F1C] border border-gray-700 text-purple-300 outline-none">
+                                    <option v-for="c in ALL_ROYAL_CITIES" :key="c" :value="c">{{ c }}</option>
+                                </select>
+                            </div>
+                            <div class="flex gap-2 font-mono">
+                                <div class="w-full flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-orange-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(fragmentPrices.soul.city, tierKey, 'frag_soul', '0')">
+                                    <span class="text-xs text-gray-500 mr-3 uppercase font-bold tracking-wider">Buy</span>
+                                    <input type="number" v-model="pricesData[fragmentPrices.soul.city][tierKey].fragments.soul" @change="savePricesAndFetch(fragmentPrices.soul.city, tierKey, 'frag_soul', '0')" class="bg-transparent text-white w-full py-2.5 text-right focus:outline-none text-sm font-bold">
+                                    <span class="text-[10px] text-gray-500 ml-3 w-12 text-right" :class="getItemFreshnessTextClass(fragmentPrices.soul.city, tierKey, 'frag_soul', '0')">{{ getItemFreshnessTime(fragmentPrices.soul.city, tierKey, 'frag_soul', '0') }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="text-xs font-bold text-orange-500 uppercase mb-2 flex justify-between items-center pr-1">
+                                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-rose-400 shadow-[0_0_8px_rgba(251,113,133,0.8)]"></div> <span>Relic</span></div>
+                                <select v-model="cfg.frag_cities.relic" @change="saveAndFetch" class="input-pro py-0.5 px-2 text-[10px] rounded bg-[#090F1C] border border-gray-700 text-rose-300 outline-none">
+                                    <option v-for="c in ALL_ROYAL_CITIES" :key="c" :value="c">{{ c }}</option>
+                                </select>
+                            </div>
+                            <div class="flex gap-2 font-mono">
+                                <div class="w-full flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-orange-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(fragmentPrices.relic.city, tierKey, 'frag_relic', '0')">
+                                    <span class="text-xs text-gray-500 mr-3 uppercase font-bold tracking-wider">Buy</span>
+                                    <input type="number" v-model="pricesData[fragmentPrices.relic.city][tierKey].fragments.relic" @change="savePricesAndFetch(fragmentPrices.relic.city, tierKey, 'frag_relic', '0')" class="bg-transparent text-white w-full py-2.5 text-right focus:outline-none text-sm font-bold">
+                                    <span class="text-[10px] text-gray-500 ml-3 w-12 text-right" :class="getItemFreshnessTextClass(fragmentPrices.relic.city, tierKey, 'frag_relic', '0')">{{ getItemFreshnessTime(fragmentPrices.relic.city, tierKey, 'frag_relic', '0') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-box p-6 border border-purple-900/50 rounded-xl bg-gray-900/40 shadow-inner">
+                        <h3 class="text-sm font-black text-purple-400 uppercase tracking-widest mb-2 border-b border-gray-800/50 pb-3">
+                            Journals (T{{cfg.tier}})
+                        </h3>
+                        <p class="text-xs text-gray-400 mb-5 bg-black/30 p-2 rounded border border-gray-800">
+                            <span v-if="cfg.use_own_journals" class="text-purple-400 font-bold block mb-1">INFO: "Use Own Laborer" Aktif.</span>
+                            Harga ini tidak akan masuk ke kalkulator karena fitur putar buku Laborer sedang menyala. Kalau dimatikan, kalkulator akan baca Buy Empty & Sell Full dari <span class="text-white">{{ cfg.buy_city }}</span>.
+                        </p>
+
+                        <div v-for="jtype in ['fletcher','imbuer','blacksmith','toolmaker']" :key="jtype" class="mb-5">
+                            <div class="text-xs font-bold text-gray-300 uppercase mb-2 flex justify-between items-center pr-1">
+                                <span>{{ jtype }}</span>
+                                <span class="text-[10px] text-purple-500 font-bold tracking-wider">@ {{ cfg.buy_city }}</span>
+                            </div>
+                            <div class="flex gap-3 font-mono">
+                                <div class="w-1/2 flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-purple-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(cfg.buy_city, tierKey, 'journal_' + jtype, 'empty')">
+                                    <span class="text-xs text-gray-500 mr-2 uppercase font-bold tracking-wider">Buy MT</span>
+                                    <input type="number"
+                                        v-model="pricesData[cfg.buy_city][tierKey].journal[jtype].empty"
+                                        @change="savePricesAndFetch(cfg.buy_city, tierKey, 'journal_' + jtype, 'empty')"
+                                        class="bg-transparent text-white w-full py-2.5 text-right focus:outline-none text-xs font-bold"
+                                        :disabled="cfg.use_own_journals">
+                                    <span class="text-[10px] text-gray-500 ml-2 w-10 text-right" :class="getItemFreshnessTextClass(cfg.buy_city, tierKey, 'journal_' + jtype, 'empty')">{{ getItemFreshnessTime(cfg.buy_city, tierKey, 'journal_' + jtype, 'empty') }}</span>
+                                </div>
+                                <div class="w-1/2 flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-emerald-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(cfg.buy_city, tierKey, 'journal_' + jtype, 'full')">
+                                    <span class="text-xs text-emerald-600 mr-2 uppercase font-bold tracking-wider">Sell FL</span>
+                                    <input type="number"
+                                        v-model="pricesData[cfg.buy_city][tierKey].journal[jtype].full"
+                                        @change="savePricesAndFetch(cfg.buy_city, tierKey, 'journal_' + jtype, 'full')"
+                                        class="bg-transparent text-emerald-400 w-full py-2.5 text-right focus:outline-none text-xs font-bold"
+                                        :disabled="cfg.use_own_journals">
+                                    <span class="text-[10px] text-gray-500 ml-2 w-10 text-right" :class="getItemFreshnessTextClass(cfg.buy_city, tierKey, 'journal_' + jtype, 'full')">{{ getItemFreshnessTime(cfg.buy_city, tierKey, 'journal_' + jtype, 'full') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOME OF INSIGHT (T4 Only — used for Satchel crafting) -->
+                    <div class="data-box p-6 border border-sky-900/40 rounded-xl bg-gray-900/40 shadow-inner">
+                        <h3 class="text-sm font-black text-sky-400 uppercase tracking-widest mb-5 border-b border-gray-800/50 pb-3">Tome of Insight (T4)</h3>
+
+                        <div class="text-xs font-bold text-sky-300 uppercase mb-3 flex justify-between items-center pr-1">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"></div>
+                                <span>Buy Price</span>
+                            </div>
+                            <select v-model="cfg.tome_city" @change="saveAndFetch" class="input-pro py-0.5 px-2 text-[10px] rounded bg-[#090F1C] border border-gray-700 text-sky-300 outline-none">
+                                <option v-for="c in ALL_ROYAL_CITIES" :key="c" :value="c">{{ c }}</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="flex gap-2 font-mono">
+                                <div class="w-full flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-sky-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(cfg.tome_city || cfg.buy_city, 't4', 'tome_insight', '0')">
+                                    <span class="text-[11px] text-sky-300 mr-3 uppercase font-bold tracking-wider w-10 flex-shrink-0">T4</span>
+                                    <input type="number"
+                                           v-model="pricesData[cfg.tome_city || cfg.buy_city]['t4'].tome_of_insight['T4_SKILLBOOK_STANDARD']"
+                                           @change="savePricesAndFetch(cfg.tome_city || cfg.buy_city, 't4', 'tome_insight', '0')"
+                                           placeholder="—"
+                                           class="bg-transparent text-white w-full py-2.5 text-right focus:outline-none text-sm font-bold">
+                                    <span class="text-[10px] text-gray-500 ml-3 w-12 text-right" :class="getItemFreshnessTextClass(cfg.tome_city || cfg.buy_city, 't4', 'tome_insight', '0')">{{ getItemFreshnessTime(cfg.tome_city || cfg.buy_city, 't4', 'tome_insight', '0') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-1">Satchel crafting only requires T4 Tome of Insight.</p>
+                    </div>
+
+                    <!-- FACTION CRESTS & CITY HEARTS (Refactored to match Artifact Fragments grid) -->
+                    <div class="data-box p-6 border border-teal-900/40 rounded-xl bg-gray-900/40 shadow-inner">
+                        <h3 class="text-sm font-black text-teal-400 uppercase tracking-widest mb-5 border-b border-gray-800/50 pb-3">Faction Crests & City Hearts</h3>
+
+                        <!-- CRESTS (uses current tier) -->
+                        <div class="mb-6">
+                            <div class="text-xs font-bold text-amber-300 uppercase mb-3 flex justify-between items-center pr-1">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
+                                    <span>Faction Crests (T{{cfg.tier}})</span>
+                                </div>
+                                <span class="text-[10px] text-amber-600 font-bold tracking-wider">@ {{ cfg.buy_city }}</span>
+                            </div>
+                            <div v-for="crest in CREST_HEART_LIST.crests" :key="crest.id" class="mb-2">
+                                <div class="flex gap-2 font-mono">
+                                    <div class="w-full flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-amber-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(cfg.buy_city, tierKey, 'art_' + crest.id, '0')">
+                                        <span class="text-[11px] text-amber-300 mr-3 uppercase font-bold tracking-wider w-40 flex-shrink-0 truncate">{{ crest.name }}</span>
+                                        <input type="number"
+                                               v-model="pricesData[cfg.buy_city][tierKey].artifacts[crest.id]"
+                                               @change="savePricesAndFetch(cfg.buy_city, tierKey, 'art_' + crest.id, '0')"
+                                               placeholder="—"
+                                               class="bg-transparent text-white w-full py-2.5 text-right focus:outline-none text-sm font-bold">
+                                        <div class="flex items-center gap-1 ml-3 flex-shrink-0">
+                                            <div class="w-1.5 h-1.5 rounded-full" :class="getItemFreshnessTextClass(cfg.buy_city, tierKey, 'art_' + crest.id, '0').replace('text-', 'bg-')"></div>
+                                            <span class="text-[10px] text-gray-500 w-10 text-right" :class="getItemFreshnessTextClass(cfg.buy_city, tierKey, 'art_' + crest.id, '0')">{{ getItemFreshnessTime(cfg.buy_city, tierKey, 'art_' + crest.id, '0') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HEARTS (always T4) -->
+                        <div>
+                            <div class="text-xs font-bold text-rose-400 uppercase mb-3 flex justify-between items-center pr-1">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-rose-400 shadow-[0_0_8px_rgba(251,113,133,0.8)]"></div>
+                                    <span>City Hearts (Always T4)</span>
+                                </div>
+                                <span class="text-[10px] text-rose-600 font-bold tracking-wider">@ {{ cfg.buy_city }}</span>
+                            </div>
+                            <div v-for="heart in CREST_HEART_LIST.hearts" :key="heart.id" class="mb-2">
+                                <div class="flex gap-2 font-mono">
+                                    <div class="w-full flex items-center bg-[#090F1C] rounded-lg px-3 border border-gray-700 hover:border-rose-500/50 transition-colors shadow-inner" :class="getItemFreshnessClass(cfg.buy_city, 't4', 'art_' + heart.id, '0')">
+                                        <span class="text-[11px] text-rose-300 mr-3 uppercase font-bold tracking-wider w-40 flex-shrink-0 truncate">{{ heart.name }}</span>
+                                        <input type="number"
+                                               v-model="pricesData[cfg.buy_city]['t4'].artifacts[heart.id]"
+                                               @change="savePricesAndFetch(cfg.buy_city, 't4', 'art_' + heart.id, '0')"
+                                               placeholder="—"
+                                               class="bg-transparent text-white w-full py-2.5 text-right focus:outline-none text-sm font-bold">
+                                        <div class="flex items-center gap-1 ml-3 flex-shrink-0">
+                                            <div class="w-1.5 h-1.5 rounded-full" :class="getItemFreshnessTextClass(cfg.buy_city, 't4', 'art_' + heart.id, '0').replace('text-', 'bg-')"></div>
+                                            <span class="text-[10px] text-gray-500 w-10 text-right" :class="getItemFreshnessTextClass(cfg.buy_city, 't4', 'art_' + heart.id, '0')">{{ getItemFreshnessTime(cfg.buy_city, 't4', 'art_' + heart.id, '0') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endraw %}

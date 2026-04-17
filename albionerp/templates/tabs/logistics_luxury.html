@@ -1,0 +1,44 @@
+{% raw %}
+<!-- 👑 LUXURY ARBITRAGE -->
+    <div v-if="activeTab === 'logistics_luxury'">
+        <div class="glass-card p-6 mb-6">
+            <div class="mb-6 border-b border-[#1E2D45] pb-6 flex flex-col md:flex-row justify-between md:items-end gap-5">
+                <div>
+                    <h2 class="text-2xl font-black text-yellow-400 uppercase tracking-wide flex items-center gap-3">
+                        <i data-lucide="crown" class="w-8 h-8"></i> Luxury Goods Arbitrage
+                    </h2>
+                    <p class="text-sm text-gray-500 mt-1">Kalkulasi cuan transport dari Base City ({{ cfg.buy_city }}) ke semua Faction NPC.</p>
+                </div>
+            </div>
+
+            <div v-if="luxuryArbitrage && luxuryArbitrage.length > 0" class="data-box p-5 border-l-4 border-l-yellow-500 bg-[#0A101C]">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    <div v-for="item in luxuryArbitrage" :key="item.name" class="bg-black/30 p-4 rounded-xl shadow-inner border border-[#141E30] flex flex-col justify-between hover:border-yellow-500/30 transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-gray-300 truncate pr-2">{{ item.name }} (T{{ item.t }})</span>
+                                <span class="text-[10px] bg-yellow-900/50 text-yellow-400 border border-yellow-800 px-1.5 py-0.5 rounded font-black whitespace-nowrap">{{ item.city }}</span>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-gray-500 mb-2 border-b border-[#1E2D45] pb-2">
+                                <span>Modal: <span class="text-rose-400 font-mono">{{ item.cost.toLocaleString() }}</span></span>
+                                <span>Weight: <span class="text-cyan-400 font-mono">{{ item.w }}kg</span></span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end pt-2">
+                            <span class="text-[10px] uppercase text-gray-500">Net Profit / Pcs</span>
+                            <div class="text-right">
+                                <span class="text-lg font-black text-emerald-400 mono drop-shadow">{{ item.p.toLocaleString() }}</span>
+                                <span class="text-xs text-emerald-500/70 ml-1 font-bold">({{ item.pct.toFixed(1) }}%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else class="text-center py-16 bg-black/20 rounded-xl border border-[#1E2D45]">
+                <p class="text-gray-500 text-sm font-bold uppercase tracking-widest">Tidak ada Luxury Goods profit di kota {{ cfg.buy_city }}.</p>
+                <p class="text-xs text-gray-600 mt-2">Coba nyalakan ingestor dan update market harga Luxury Goods.</p>
+            </div>
+        </div>
+    </div>
+
+    {% endraw %}

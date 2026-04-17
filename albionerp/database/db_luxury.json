@@ -1,0 +1,23 @@
+{
+  "T4_LUXURY_MARTLOCK": {"name": "Corrupted Scroll", "city": "Martlock", "price": 1000, "weight": 1.0, "tier": 4},
+  "T5_LUXURY_MARTLOCK": {"name": "Thin Booklet", "city": "Martlock", "price": 5000, "weight": 1.0, "tier": 5},
+  "T6_LUXURY_MARTLOCK": {"name": "Ancient Tome", "city": "Martlock", "price": 25000, "weight": 1.0, "tier": 6},
+  "T4_LUXURY_LYMHURST": {"name": "Silver Cup", "city": "Lymhurst", "price": 1000, "weight": 1.0, "tier": 4},
+  "T5_LUXURY_LYMHURST": {"name": "Silver Mirror", "city": "Lymhurst", "price": 5000, "weight": 1.0, "tier": 5},
+  "T6_LUXURY_LYMHURST": {"name": "Silver Candelabrum", "city": "Lymhurst", "price": 25000, "weight": 1.0, "tier": 6},
+  "T4_LUXURY_FORTSTERLING": {"name": "Simple Stone Toy", "city": "Fort Sterling", "price": 1000, "weight": 1.0, "tier": 4},
+  "T5_LUXURY_FORTSTERLING": {"name": "Stone Mask", "city": "Fort Sterling", "price": 5000, "weight": 1.0, "tier": 5},
+  "T6_LUXURY_FORTSTERLING": {"name": "Stone Idol", "city": "Fort Sterling", "price": 25000, "weight": 1.0, "tier": 6},
+  "T4_LUXURY_BRIDGEWATCH": {"name": "Feather Talisman", "city": "Bridgewatch", "price": 1000, "weight": 1.0, "tier": 4},
+  "T5_LUXURY_BRIDGEWATCH": {"name": "Dreamcatcher", "city": "Bridgewatch", "price": 5000, "weight": 1.0, "tier": 5},
+  "T6_LUXURY_BRIDGEWATCH": {"name": "Holy Fetish", "city": "Bridgewatch", "price": 25000, "weight": 1.0, "tier": 6},
+  "T4_LUXURY_THETFORD": {"name": "Ornamental Scepter", "city": "Thetford", "price": 1000, "weight": 1.0, "tier": 4},
+  "T5_LUXURY_THETFORD": {"name": "Globus Cruciger", "city": "Thetford", "price": 5000, "weight": 1.0, "tier": 5},
+  "T6_LUXURY_THETFORD": {"name": "Golden Crown", "city": "Thetford", "price": 25000, "weight": 1.0, "tier": 6},
+  "T4_LUXURY_CAERLEON": {"name": "Ritual Candles", "city": "Caerleon", "price": 1000, "weight": 1.0, "tier": 4},
+  "T5_LUXURY_CAERLEON": {"name": "Blood Chalice", "city": "Caerleon", "price": 5000, "weight": 1.0, "tier": 5},
+  "T6_LUXURY_CAERLEON": {"name": "Sacrificial Dagger", "city": "Caerleon", "price": 25000, "weight": 1.0, "tier": 6},
+  "T6_LUXURY_ANY": {"name": "Golden Frame", "city": "Any", "price": 10000, "weight": 1.0, "tier": 6},
+  "T7_LUXURY_ANY": {"name": "Golden Gyroscope", "city": "Any", "price": 50000, "weight": 1.0, "tier": 7},
+  "T8_LUXURY_ANY": {"name": "Golden Sextant", "city": "Any", "price": 250000, "weight": 1.0, "tier": 8}
+}

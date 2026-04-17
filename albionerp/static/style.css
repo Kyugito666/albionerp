@@ -1,0 +1,60 @@
+:root {
+    --bg-base:    #080E1A;
+    --bg-card:    #0E1829;
+    --bg-input:   #131E30;
+    --border:     #1E2D45;
+    --border-mid: #243549;
+    --text-dim:   #64748B;
+    --text-body:  #CBD5E1;
+    --emerald:    #10B981;
+    --rose:       #F43F5E;
+}
+
+body { 
+    background-color: var(--bg-base); 
+    color: var(--text-body); 
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; 
+}
+
+.mono { 
+    font-family: Consolas, Monaco, 'Courier New', monospace; 
+}
+
+.glass-card {
+    background: linear-gradient(135deg, rgba(11, 18, 32, 0.9), rgba(5, 10, 20, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px -12px rgba(0,0,0,0.7);
+    backdrop-filter: blur(12px);
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.data-box {
+    background: #090F1C;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+.data-box:hover { border-color: #314158; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3); }
+
+.lucide { width: 1.25rem; height: 1.25rem; stroke-width: 2.5px; }
+
+.section-label { font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-dim); }
+
+.input-pro {
+    background: #050A14;
+    border: 1px solid var(--border);
+    color: #F8FAFC;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.input-pro:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); transform: translateY(-1px); }
+
+.animate-fade-in { animation: fadeIn 0.5s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+[v-cloak] { display: none; }

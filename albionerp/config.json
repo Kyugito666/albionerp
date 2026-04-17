@@ -1,0 +1,1846 @@
+{
+  "farming_tier": 5,
+  "tier": 4,
+  "q0": 0,
+  "q1": 0,
+  "q2": 0,
+  "q3": 0,
+  "q4": 0,
+  "qty_gear": {
+    "q0": 0,
+    "q1": 0,
+    "q2": 0,
+    "q3": 0,
+    "q4": 0
+  },
+  "qty_refine": {
+    "q0": 20,
+    "q1": 3,
+    "q2": 4,
+    "q3": 4,
+    "q4": 0
+  },
+  "qty_cook": {
+    "q0": 5,
+    "q1": 0,
+    "q2": 0,
+    "q3": 0,
+    "q4": 0
+  },
+  "selected_items": {
+    "Ancient Tome": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Arcane Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Assassin Hood": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Assassin Jacket": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Assassin Shoes": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Avalonian Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Bag": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Battleaxe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Bear Paws": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Bedrock Mace": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Beef Sandwich T8": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Beef Stew T8": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Black Monk Stave": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Blazing Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Blight Staff": {
+      ".0": true,
+      ".1": true,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Blood Chalice": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Bloodletter": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Boltcasters": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Bow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Bow of Badon": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Brecilien Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Bridgewatch Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Brimstone Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Broadsword": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cabbage Soup T5": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Caerleon Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Caitiff Shield": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Camlann Mace": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Carrioncaller": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Carving Sword": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Chicken Omelette T3": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Clarent Blade": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Claws": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Claymore": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cleric Cowl": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cleric Robe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cleric Sandals": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Corrupted Scroll": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Crossbow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cryptcandle": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cultist Cowl": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cultist Robe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cultist Sandals": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cursed Skull": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Cursed Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Dagger": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Dagger Pair": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Damnation Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Deathgivers": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Demon Armor": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Demon Boots": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Demon Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Demon Fang": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Demon Helmet": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Demonic Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Divine Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Double Bladed Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Dreamcatcher": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Druid Cowl": {
+      ".0": true,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Druid Robe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Druid Sandals": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Druidic Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Dual Swords": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Energy Potion T6": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Enigmatic Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Evensong": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Eye of Secrets": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Facebreaker": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Fallen Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Feather Talisman": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Fiend Cowl": {
+      ".0": true,
+      ".1": true,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Fiend Robe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Fiend Sandals": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Fire Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Forge Hammers": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Fort Sterling Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Frost Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Galatine Pair": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Glacial Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Glaive": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Globus Cruciger": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Goat Stew T4": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Golden Crown": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Golden Frame": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Golden Gyroscope": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Golden Sextant": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Goose Omelette T5": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Graveguard Armor": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Graveguard Boots": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Graveguard Helmet": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Great Arcane Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Great Cursed Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Great Fire Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Great Frost Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Great Hammer": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Great Holy Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Great Nature Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Greataxe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Grovekeeper": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Guardian Armor": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Guardian Boots": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Guardian Helmet": {
+      ".0": false,
+      ".1": false,
+      ".2": true,
+      ".3": false,
+      ".4": false
+    },
+    "Halberd": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hammer": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Healing Potion T6": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Heavy Crossbow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Heavy Mace": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hellion Hood": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hellion Jacket": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hellion Shoes": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Heretic Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Heron Spear": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hoarfrost Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Holy Fetish": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Holy Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hunter Hood": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hunter Jacket": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Hunter Shoes": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Icicle Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Incubus Mace": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Infernal Scythe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Infernal Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Invisibility Potion T8": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Iron-clad Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Judicator Armor": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Judicator Boots": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Judicator Helmet": {
+      ".0": true,
+      ".1": true,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Keeper Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Knight Armor": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Knight Boots": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Knight Helmet": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Leering Cane": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Lifecurse Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Lifetouch Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Light Crossbow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Longbow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Lymhurst Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mace": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mage Cowl": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mage Robe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mage Sandals": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Major Energy Potion T8": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Major Healing Potion T8": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Major Poison Potion T8": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Major Resistance Potion T8": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Martlock Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mercenary Hood": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mercenary Jacket": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mercenary Shoes": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Minor Energy Potion T4": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Minor Healing Potion T4": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Minor Poison Potion T4": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Minor Resistance Potion T4": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mistcaller": {
+      ".0": true,
+      ".1": true,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Morgana Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Morning Star": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Muisak": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Mutton Stew T6": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Nature Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Occult Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Ornamental Scepter": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Permafrost Prism": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Pike": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Poison Potion T6": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Polehammer": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Pork Omelette T7": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Pork Pie T7": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Potato Salad T4": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Quarterstaff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Rampant Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Redemption Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Resistance Potion T6": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Ritual Candles": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Roast Pork T7": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Sacrificial Dagger": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Sarcophagus": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Satchel of Insight": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Scholar Cowl": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Scholar Robe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Scholar Sandals": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Shield": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Siegebow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Silver Candelabrum": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Silver Cup": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Silver Mirror": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Simple Stone Toy": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Soldier Armor": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Soldier Boots": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Soldier Helmet": {
+      ".0": true,
+      ".1": false,
+      ".2": false,
+      ".3": true,
+      ".4": false
+    },
+    "Soulscythe": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Spear": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Specter Hood": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Specter Jacket": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Specter Shoes": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Spirithunter": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Staff of Balance": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Stalker Hood": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Stalker Jacket": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Stalker Shoes": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Stone Idol": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Stone Mask": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Taproot": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Thetford Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Thin Booklet": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Tombhammer": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Tome of Spells": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Torch": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Trinity Spear": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Turnip Salad T4": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Undead Cape": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Wailing Bow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Warbow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Weeping Repeater": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Wheat Soup T3": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Whispering Bow": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Wild Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Wildfire Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    },
+    "Witchwork Staff": {
+      ".0": false,
+      ".1": false,
+      ".2": false,
+      ".3": false,
+      ".4": false
+    }
+  },
+  "buy_city": "Lymhurst",
+  "sell_city": "Lymhurst",
+  "craft_city": "Lymhurst",
+  "route_from": "Fort Sterling",
+  "route_to": "Lymhurst",
+  "raw_cities": {
+    "fiber": "Thetford",
+    "hide": "Bridgewatch",
+    "ore": "Fort Sterling",
+    "stone": "Martlock",
+    "wood": "Lymhurst"
+  },
+  "refine_cities": {
+    "block": "Bridgewatch",
+    "cloth": "Lymhurst",
+    "leather": "Martlock",
+    "plank": "Fort Sterling",
+    "steel": "Thetford"
+  },
+  "frag_cities": {
+    "relic": "Fort Sterling",
+    "rune": "Fort Sterling",
+    "soul": "Fort Sterling"
+  },
+  "tome_city": "Lymhurst",
+  "gear": {
+    "bag": {
+      "e": 2,
+      "q": "excellent",
+      "t": 8
+    },
+    "boots": {
+      "e": 2,
+      "q": "excellent",
+      "s": 110,
+      "t": 8
+    },
+    "food": "pie_7_0",
+    "mount": {
+      "q": "excellent",
+      "t": 8,
+      "type": "ox"
+    }
+  },
+  "focus_refine": false,
+  "focus_craft": false,
+  "focus_cooking": false,
+  "focus_alchemy": false,
+  "premium_tax": true,
+  "fee_refine": 500,
+  "fee_craft": 850,
+  "fee_cooking": 500,
+  "fee_alchemy": 500,
+  "use_own_journals": true,
+  "do_refine": false,
+  "do_craft": true,
+  "use_multi_refine": false,
+  "multi_refine_only_mode": true,
+  "use_multi_tier": true,
+  "cancelled_crafts": {},
+  "adjusted_qty_crafts": {},
+  "smart_budget": 8000000,
+  "ai_settings": {
+    "enc": {
+      ".0": true,
+      ".1": true,
+      ".2": true,
+      ".3": true,
+      ".4": false
+    },
+    "gear_filter": "non_artifact",
+    "item_type": "both",
+    "max_items": 48,
+    "min_margin": 20,
+    "min_profit": 1000,
+    "vol_target": 20
+  },
+  "active_profile": "Default",
+  "profiles": {
+    "Default": {
+      "fame_exact": {
+        "craft_Arcane Staff Crafter": 422877.45392848353,
+        "craft_Axe Crafter": 1393247.469615583,
+        "craft_Bag Crafter": 0,
+        "craft_Bow Crafter": 74754.87882093314,
+        "craft_Cape Crafter": 0,
+        "craft_Cloth Armor Crafter": 1060392.477492513,
+        "craft_Cloth Helmet Crafter": 780463.9691859321,
+        "craft_Cloth Shoes Crafter": 1516479.0153255658,
+        "craft_Crossbow Crafter": 61447.56594942993,
+        "craft_Cursed Staff Crafter": 39882.132155551284,
+        "craft_Dagger Crafter": 55687.56594942993,
+        "craft_Fire Staff Crafter": 55687.56594942993,
+        "craft_Frost Staff Crafter": 76914.87882093314,
+        "craft_Hammer Crafter": 307.6332461766796,
+        "craft_Holy Staff Crafter": 187452.67788853985,
+        "craft_Leather Hood Crafter": 1516479.0153255658,
+        "craft_Leather Jacket Crafter": 4178924.767334145,
+        "craft_Leather Shoes Crafter": 1646029.0773137466,
+        "craft_Mace Crafter": 17197.22126474957,
+        "craft_Nature Staff Crafter": 55687.56594942993,
+        "craft_Plate Armor Crafter": 1393247.469615583,
+        "craft_Plate Boots Crafter": 1276228.228977641,
+        "craft_Plate Helmet Crafter": 61807.56594942993,
+        "craft_Quarterstaff Crafter": 55687.56594942993,
+        "craft_Shield Crafter": 187452.67788853985,
+        "craft_Spear Crafter": 39882.132155551284,
+        "craft_Sword Crafter": 74754.87882093314,
+        "craft_Tome Crafter": 484080.14566446334,
+        "craft_Torch Crafter": 97282.17419095931,
+        "craft_War Gloves Crafter": 307.6332461766796,
+        "refine_fiber": 13532078.525711473,
+        "refine_hide": 14986024.100869304,
+        "refine_ore": 3113029.574110698,
+        "refine_stone": 0,
+        "refine_wood": 27060902.806593504
+      },
+      "fiber": {
+        "m": 100,
+        "s": 73
+      },
+      "hide": {
+        "m": 100,
+        "s": 76
+      },
+      "main_specs": {
+        "Arcane Staff Crafter": 19,
+        "Axe Crafter": 30,
+        "Bag Crafter": 1,
+        "Bow Crafter": 10,
+        "Cape Crafter": 1,
+        "Cloth Armor Crafter": 27,
+        "Cloth Helmet Crafter": 24,
+        "Cloth Shoes Crafter": 31,
+        "Crossbow Crafter": 9,
+        "Cursed Staff Crafter": 8,
+        "Dagger Crafter": 9,
+        "Fire Staff Crafter": 9,
+        "Frost Staff Crafter": 10,
+        "Hammer Crafter": 2,
+        "Holy Staff Crafter": 14,
+        "Leather Hood Crafter": 31,
+        "Leather Jacket Crafter": 46,
+        "Leather Shoes Crafter": 32,
+        "Mace Crafter": 6,
+        "Nature Staff Crafter": 9,
+        "Plate Armor Crafter": 30,
+        "Plate Boots Crafter": 29,
+        "Plate Helmet Crafter": 9,
+        "Quarterstaff Crafter": 9,
+        "Shield Crafter": 14,
+        "Spear Crafter": 8,
+        "Sword Crafter": 10,
+        "Tome Crafter": 20,
+        "Torch Crafter": 11,
+        "War Gloves Crafter": 2
+      },
+      "ore": {
+        "m": 100,
+        "s": 41
+      },
+      "stone": {
+        "s": 1
+      },
+      "wood": {
+        "m": 100,
+        "s": 96
+      }
+    }
+  },
+  "specs": {
+    "fame_exact": {
+      "craft_Arcane Staff Crafter": 422877.45392848353,
+      "craft_Axe Crafter": 1393247.469615583,
+      "craft_Bag Crafter": 0,
+      "craft_Bow Crafter": 74754.87882093314,
+      "craft_Cape Crafter": 0,
+      "craft_Cloth Armor Crafter": 1060392.477492513,
+      "craft_Cloth Helmet Crafter": 780463.9691859321,
+      "craft_Cloth Shoes Crafter": 1516479.0153255658,
+      "craft_Crossbow Crafter": 61447.56594942993,
+      "craft_Cursed Staff Crafter": 39882.132155551284,
+      "craft_Dagger Crafter": 55687.56594942993,
+      "craft_Fire Staff Crafter": 55687.56594942993,
+      "craft_Frost Staff Crafter": 76914.87882093314,
+      "craft_Hammer Crafter": 307.6332461766796,
+      "craft_Holy Staff Crafter": 187452.67788853985,
+      "craft_Leather Hood Crafter": 1516479.0153255658,
+      "craft_Leather Jacket Crafter": 4178924.767334145,
+      "craft_Leather Shoes Crafter": 1646029.0773137466,
+      "craft_Mace Crafter": 17197.22126474957,
+      "craft_Nature Staff Crafter": 55687.56594942993,
+      "craft_Plate Armor Crafter": 1393247.469615583,
+      "craft_Plate Boots Crafter": 1276228.228977641,
+      "craft_Plate Helmet Crafter": 61807.56594942993,
+      "craft_Quarterstaff Crafter": 55687.56594942993,
+      "craft_Shield Crafter": 187452.67788853985,
+      "craft_Spear Crafter": 39882.132155551284,
+      "craft_Sword Crafter": 74754.87882093314,
+      "craft_Tome Crafter": 484080.14566446334,
+      "craft_Torch Crafter": 97282.17419095931,
+      "craft_War Gloves Crafter": 307.6332461766796,
+      "refine_fiber": 13532078.525711473,
+      "refine_hide": 14986024.100869304,
+      "refine_ore": 3113029.574110698,
+      "refine_stone": 0,
+      "refine_wood": 27060902.806593504
+    },
+    "fiber": {
+      "m": 100,
+      "s": 73
+    },
+    "hide": {
+      "m": 100,
+      "s": 76
+    },
+    "main_specs": {
+      "Arcane Staff Crafter": 19,
+      "Axe Crafter": 30,
+      "Bag Crafter": 1,
+      "Bow Crafter": 10,
+      "Cape Crafter": 1,
+      "Cloth Armor Crafter": 27,
+      "Cloth Helmet Crafter": 24,
+      "Cloth Shoes Crafter": 31,
+      "Crossbow Crafter": 9,
+      "Cursed Staff Crafter": 8,
+      "Dagger Crafter": 9,
+      "Fire Staff Crafter": 9,
+      "Frost Staff Crafter": 10,
+      "Hammer Crafter": 2,
+      "Holy Staff Crafter": 14,
+      "Leather Hood Crafter": 31,
+      "Leather Jacket Crafter": 46,
+      "Leather Shoes Crafter": 32,
+      "Mace Crafter": 6,
+      "Nature Staff Crafter": 9,
+      "Plate Armor Crafter": 30,
+      "Plate Boots Crafter": 29,
+      "Plate Helmet Crafter": 9,
+      "Quarterstaff Crafter": 9,
+      "Shield Crafter": 14,
+      "Spear Crafter": 8,
+      "Sword Crafter": 10,
+      "Tome Crafter": 20,
+      "Torch Crafter": 11,
+      "War Gloves Crafter": 2
+    },
+    "ore": {
+      "m": 100,
+      "s": 41
+    },
+    "stone": {
+      "s": 1
+    },
+    "wood": {
+      "m": 100,
+      "s": 96
+    }
+  },
+  "activeListItemTab": "gear",
+  "activePriceTab": "gears",
+  "activeTab": "dashboard",
+  "alchemy_city": "Lymhurst",
+  "bonus_city_consumables": true,
+  "bonus_city_craft": true,
+  "bonus_city_refine": true,
+  "cooking_city": "Lymhurst",
+  "farming_buy_cities": {
+    "crops": "Thetford",
+    "dairy": "Martlock",
+    "herbs": "Thetford",
+    "intermediate": "Caerleon",
+    "meat": "Lymhurst"
+  },
+  "gemini_api_key": "",
+  "refine_only_mat": "block",
+  "use_multi_consumables": false,
+  "use_multi_cooking": true,
+  "use_multi_farming": true,
+  "use_refine_only": false
+}

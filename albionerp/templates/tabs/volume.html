@@ -1,0 +1,148 @@
+{% raw %}
+<div v-if="activeTab === 'volume'">
+    <div class="glass-card p-6 mb-6">
+
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-[#1E2D45] pb-5">
+            <div class="flex items-center gap-3">
+                <i data-lucide="bar-chart-3" class="w-6 h-6 text-indigo-400"></i>
+                <div>
+                    <h2 class="text-xl font-black text-gray-200">Volume Analytics @ BM</h2>
+                    <p class="text-sm text-gray-500 mt-0.5">
+                        {{ volSummary ? volSummary.total + ' records · ' + volSummary.unique_items + ' unique items' : 'No data yet' }}
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+                <select v-model="volFilter.tier" @change="loadVolumeData" class="input-pro px-3 py-2 rounded text-sm">
+                    <option value="">All Tiers</option>
+                    <option v-for="n in [3,4,5,6,7,8]" :value="String(n)">T{{ n }}</option>
+                </select>
+                <select v-model="volFilter.cat" @change="loadVolumeData" class="input-pro px-3 py-2 rounded text-sm">
+                    <option value="">All Categories</option>
+                    <optgroup label="── NORMAL GEAR ──" class="text-gray-500 font-bold bg-[#090F1C] text-[10px]">
+                        <option class="text-white text-sm" value="weapons">Weapons</option>
+                        <option class="text-white text-sm" value="armors">Armors</option>
+                        <option class="text-white text-sm" value="helmets">Helmets</option>
+                        <option class="text-white text-sm" value="shoes">Shoes</option>
+                        <option class="text-white text-sm" value="offhands">Offhands</option>
+                        <option class="text-white text-sm" value="bags">Bags</option>
+                        <option class="text-white text-sm" value="capes">Capes</option>
+                    </optgroup>
+                    <optgroup label="── ARTIFACT GEAR ──" class="text-purple-500 font-bold bg-[#090F1C] text-[10px]">
+                        <option class="text-white text-sm" value="artifact_weapons">Art. Weapons</option>
+                        <option class="text-white text-sm" value="artifact_armors">Art. Armors</option>
+                        <option class="text-white text-sm" value="artifact_helmets">Art. Helmets</option>
+                        <option class="text-white text-sm" value="artifact_shoes">Art. Shoes</option>
+                        <option class="text-white text-sm" value="artifact_offhands">Art. Offhands</option>
+                        <option class="text-white text-sm" value="artifact_bags">Art. Bags</option>
+                        <option class="text-white text-sm" value="artifact_capes">Art. Capes</option>
+                    </optgroup>
+                </select>
+                <select v-model="volFilter.enchant" @change="loadVolumeData" class="input-pro px-3 py-2 rounded text-sm">
+                    <option value="">All Enchants</option>
+                    <option v-for="e in ['.0','.1','.2','.3','.4']" :value="e">{{ e }}</option>
+                </select>
+                <select v-model="volFilter.days" @change="loadVolumeData" class="input-pro px-3 py-2 rounded text-sm">
+                    <option value="7">7 days</option>
+                    <option value="14">14 days</option>
+                    <option value="30">30 days</option>
+                    <option value="90">90 days</option>
+                    <option value="0">All time</option>
+                </select>
+                <button @click="clearVolumeHistory" class="bg-rose-900/60 hover:bg-rose-800 border border-rose-800 text-rose-300 px-4 py-2 rounded text-sm font-bold transition-colors flex items-center gap-2">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i> Clear
+                </button>
+            </div>
+        </div>
+
+        <div v-if="volSummary" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="data-box p-4 text-center">
+                <p class="section-label mb-1">Total Records</p>
+                <span class="text-2xl font-black text-cyan-400 mono">{{ volSummary.total.toLocaleString() }}</span>
+            </div>
+            <div class="data-box p-4 text-center">
+                <p class="section-label mb-1">Unique Items</p>
+                <span class="text-2xl font-black text-indigo-400 mono">{{ volSummary.unique_items }}</span>
+            </div>
+            <div class="data-box p-4 text-center">
+                <p class="section-label mb-1">Avg BM Price</p>
+                <span class="text-2xl font-black text-emerald-400 mono">{{ volSummary.avg_price?.toLocaleString() }}</span>
+            </div>
+            <div class="data-box p-4 text-center">
+                <p class="section-label mb-1">Last Capture</p>
+                <span class="text-sm font-bold text-gray-300 mono">{{ volSummary.last_capture_time || '—' }}</span>
+                <p class="text-xs text-gray-600">{{ volSummary.last_capture_date || '' }}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6 min-w-0">
+            <div class="data-box p-5 flex flex-col min-w-0">
+                <div class="flex flex-col mb-4 gap-2">
+                    <h3 class="section-label text-emerald-400">Gear Volume Trend</h3>
+                    <input type="text" v-model="volSearch" placeholder="Cari barang (Misal: Cowl)..." class="input-pro w-full p-2 rounded text-xs font-bold border border-gray-700 bg-[#090F1C] focus:border-emerald-500 transition-colors">
+                    <select v-model="volChartItem" @change="renderTrendChart" class="input-pro p-2 rounded text-xs font-bold w-full bg-[#0D1626] border border-[#1E2D45]">
+                        <option value="">-- Pilih Item --</option>
+                        <option v-for="item in filteredVolItemList" :key="item" :value="item">{{ getRealName(item) }}</option>
+                    </select>
+                </div>
+                <div class="chart-wrap relative h-80 w-full"><canvas id="trendChart"></canvas></div>
+            </div>
+            <div class="data-box p-5 flex flex-col min-w-0">
+                <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
+                    <h3 class="section-label text-indigo-400">Capture Analytics per Gear</h3>
+                    <select v-model="volAmountMode" @change="renderAmountChart" class="input-pro p-1.5 rounded text-xs font-bold">
+                        <option value="volume">By Total Volume (Pcs)</option>
+                        <option value="count">By Capture Count</option>
+                        <option value="max_price">By Max Price</option>
+                    </select>
+                </div>
+                <div class="chart-wrap relative flex-grow min-h-[320px] w-full"><canvas id="amountChart"></canvas></div>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="section-label mb-4 border-b border-[#1E2D45] pb-3">Capture Log (Latest First)</h3>
+            <div class="overflow-auto max-h-[400px] rounded-lg border border-[#1E2D45]">
+                <table class="w-full text-sm mono min-w-[700px] relative">
+                    <thead class="sticky top-0 bg-[#0B1220] z-10 shadow-md">
+                        <tr class="text-gray-500 border-b border-[#1E2D45] text-xs uppercase tracking-wide">
+                            <th class="text-left py-3 pr-4">Timestamp</th>
+                            <th class="text-left py-3 pr-4">Tier</th>
+                            <th class="text-left py-3 pr-4">Category</th>
+                            <th class="text-left py-3 pr-4">Item</th>
+                            <th class="text-left py-3 pr-4">Enchant</th>
+                            <th class="text-right py-3 pr-4">BM Price</th>
+                            <th class="text-right py-3">Volume</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="row in volHistory.slice(0, 100)" :key="row.id"
+                            class="border-b border-[#0D1626] hover:bg-white/[0.02] transition-colors">
+                            <td class="py-2.5 pr-4 text-gray-500 text-xs">{{ row.ts }}</td>
+                            <td class="py-2.5 pr-4 text-cyan-400 font-black">T{{ row.tier }}</td>
+                            <td class="py-2.5 pr-4 text-indigo-400 capitalize">{{ row.cat }}</td>
+                            <td class="py-2.5 pr-4 text-gray-200 font-medium">{{ getRealName(row.item) }}</td>
+                            <td class="py-2.5 pr-4 font-black"
+                                :class="row.enchant==='.0'?'enc-0':row.enchant==='.1'?'enc-1':row.enchant==='.2'?'enc-2':row.enchant==='.3'?'enc-3':'enc-4'">
+                                {{ row.enchant }}
+                            </td>
+                            <td class="py-2.5 pr-4 text-right font-bold text-emerald-300">
+                                {{ row.price.toLocaleString() }}
+                            </td>
+                            <td class="py-2.5 text-right font-bold text-cyan-300">
+                                {{ row.volume.toLocaleString() }}
+                            </td>
+                        </tr>
+                        <tr v-if="!volHistory.length">
+                            <td colspan="7" class="text-center text-gray-600 py-10 text-sm">
+                                Belum ada data. Aktifkan ingestor dan buka market Albion.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endraw %}

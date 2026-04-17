@@ -1,0 +1,90 @@
+{% raw %}
+<!-- 🍳 LOGISTICS COOKING & ALCHEMY CALIBRATOR -->
+<div v-if="activeTab === 'logistics_consumables'">
+    <div class="glass-card p-5 mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-2 h-10 bg-gradient-to-b from-emerald-400 to-blue-500 rounded-full"></div>
+            <div>
+                <h2 class="text-lg font-black text-white uppercase tracking-tight">Cooking & Alchemy Logistics</h2>
+                <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Ingredient shopping & production tasks — cities configured in Dashboard</p>
+            </div>
+        </div>
+        <button @click="clearChecks" class="text-[10px] font-black text-rose-400 hover:text-rose-300 uppercase tracking-widest border border-rose-900/50 px-3 py-1.5 rounded-lg bg-rose-950/20 transition-all">
+            Reset All Checklist
+        </button>
+    </div>
+
+    <!-- MAIN LOGISTICS BOARD -->
+    <div v-if="data && data.logistics" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        
+        <!-- RENDER ONLY CITIES THAT HAVE COOKING OR ALCHEMY TASKS -->
+        <template v-for="city in ALL_ROYAL_CITIES" :key="city">
+            <div v-if="data.logistics[city] && (data.logistics[city].craft && data.logistics[city].craft.length > 0)" 
+                 class="glass-card flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+                
+                <div class="px-5 py-4 border-b border-[#1E2D45] bg-[#0D1626] flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-8 bg-emerald-500 rounded-full"></div>
+                        <div>
+                            <h3 class="text-lg font-black text-white uppercase tracking-tighter">{{ city }}</h3>
+                            <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Production Hub</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-5 flex-1 space-y-4">
+                    <!-- CRAFTING TASKS -->
+                    <div v-if="data.logistics[city].craft && data.logistics[city].craft.length > 0">
+                        <h4 class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <i class="fas fa-hat-chef"></i> Cooking & Alchemy Tasks
+                        </h4>
+                        <div class="space-y-3">
+                            <div v-for="task in data.logistics[city].craft" :key="task.id"
+                                 class="p-3 rounded-lg border transition-all"
+                                 :class="checkedTasks[task.id] ? 'bg-emerald-900/10 border-emerald-500/30 opacity-60' : 'bg-[#050912] border-[#1E2D45]'">
+                                <div class="flex items-start gap-3">
+                                    <input type="checkbox" v-model="checkedTasks[task.id]" class="mt-1 accent-emerald-500">
+                                    <div class="flex-1">
+                                        <p class="text-[11px] font-bold text-gray-200 leading-relaxed" v-html="task.text"></p>
+                                        <div v-if="task.fame && task.fame > 0 && task.main_node" class="mt-1.5">
+                                            <span class="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded border"
+                                                  :class="checkedTasks[task.id] ? 'text-emerald-400 bg-emerald-950/30 border-emerald-900/50' : 'text-gray-500 bg-black/30 border-gray-800'">
+                                                {{ task.main_node }} +{{ Math.floor(task.fame).toLocaleString() }} Fame
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-5 py-3 border-t border-[#1E2D45] bg-[#050912] flex justify-between items-center">
+                    <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                        Hub Weight Impact
+                    </div>
+                    <div class="text-xs font-black" :class="(data.logistics[city].peak_weight_in + data.logistics[city].peak_weight_out) > data.weight_data.max_load ? 'text-rose-400' : 'text-emerald-400'">
+                        {{ (data.logistics[city].peak_weight_in + data.logistics[city].peak_weight_out).toFixed(1) }} / {{ data.weight_data.max_load }} KG
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- GLOBAL SHOPPING LIST FOR CONSUMABLES -->
+    <div v-if="data && data.logistics && data.logistics.global_shopping_html" class="mt-8">
+        <div class="glass-card overflow-hidden">
+            <div class="px-6 py-4 border-b border-[#1E2D45] bg-gradient-to-r from-emerald-900/20 to-transparent flex justify-between items-center">
+                <h3 class="text-sm font-black text-white uppercase tracking-widest flex items-center gap-3">
+                    <i class="fas fa-shopping-basket text-emerald-400"></i> Global Shopping Manifest (Consumables)
+                </h3>
+                <button @click="clearChecks" class="text-[10px] font-black text-rose-400 hover:text-rose-300 uppercase tracking-widest border border-rose-900/50 px-3 py-1 rounded-lg bg-rose-950/20 transition-all">
+                    Reset All Checklist
+                </button>
+            </div>
+            <div class="p-6 overflow-x-auto" v-html="data.logistics.global_shopping_html">
+            </div>
+        </div>
+    </div>
+</div>
+{% endraw %}

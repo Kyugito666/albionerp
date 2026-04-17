@@ -1,0 +1,37 @@
+{% raw %}
+<!-- 🟨 SECTION 2: FARMING -->
+            <div v-if="activePriceTab === 'farming'" class="animate-in fade-in duration-500 w-full overflow-x-auto pb-4">
+                <div class="bg-gray-900/40 p-4 rounded-xl border border-gray-800/50 shadow-inner w-full mb-6">
+                    <h3 class="text-xs font-black text-yellow-500 uppercase tracking-widest mb-4 border-b border-gray-700/50 pb-3">Farming Ingredients</h3>
+                    
+                    <template v-for="(groupName, groupKey) in { 
+                        raw_crops: { n: 'Crops', i: 'leaf', c: 'text-emerald-400' }, 
+                        raw_herbs: { n: 'Herbs', i: 'flower-2', c: 'text-emerald-400' }, 
+                        raw_meat: { n: 'Raw Meat', i: 'drumstick', c: 'text-rose-400' }, 
+                        processed_ingredients: { n: 'Processed Ingredients', i: 'utensils', c: 'text-amber-400' }, 
+                        enchantments: { n: 'Enchantments', i: 'sparkles', c: 'text-cyan-400' } 
+                    }" :key="groupKey">
+                        <div v-if="Object.keys(farmingGroups[groupKey] || {}).length > 0" class="mb-6">
+                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <i :data-lucide="groupName.i" :class="groupName.c" class="w-3 h-3"></i> {{ groupName.n }}
+                            </h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                                <template v-for="t in [8,7,6,5,4,3,2,1]" :key="groupKey+'_t'+t">
+                                    <div v-for="(val, mat) in (farmingGroups[groupKey][t] || {})" :key="mat + t" class="flex flex-col gap-1 items-center p-3 rounded-lg border border-[#1E2D45] bg-[#090F1C] hover:border-indigo-500/30 transition-colors">
+                                        <div class="flex justify-between items-center w-full mb-1">
+                                            <span class="text-[11px] font-bold text-gray-400 uppercase truncate" :title="mat.replace(/_/g, ' ')">T{{t}} {{ mat.replace(/_/g, ' ') }}</span>
+                                        </div>
+                                        <input type="number" v-model.number="pricesData[cfg.buy_city]['t'+t].farming_mats[mat]" @change="savePricesAndFetch(cfg.buy_city, 't'+t, 'farming_' + mat, 'price')" class="w-full p-2 text-sm font-bold text-center rounded bg-black/60 border border-gray-700 focus:outline-none focus:border-yellow-500 transition-colors text-yellow-300">
+                                        <div class="flex items-center gap-1 mt-1 bg-black/40 px-2 py-0.5 rounded-full border border-gray-800/50 w-full justify-center">
+                                            <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" :class="getItemFreshnessTextClass(cfg.buy_city, 't'+t, 'farming_' + mat, 'price').replace('text-', 'bg-')"></div>
+                                            <span class="text-[9px] text-gray-500">{{ getItemFreshnessTime(cfg.buy_city, 't'+t, 'farming_' + mat, 'price') }}</span>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            {% endraw %}

@@ -1,0 +1,1695 @@
+[
+  {
+    "cost": 2473143,
+    "date": "2026-03-31",
+    "item": "Batch T4 (Q: 10/1/0/0/0)",
+    "items": [
+      {
+        "cat": "armors",
+        "enchant": ".1",
+        "item": "Cleric Robe",
+        "orig_profit": 1663,
+        "orig_sell": 8532,
+        "qty": 1,
+        "unit_cost": 6527.360000000001
+      },
+      {
+        "cat": "armors",
+        "enchant": ".1",
+        "item": "Guardian Armor",
+        "orig_profit": 359,
+        "orig_sell": 11060,
+        "qty": 1,
+        "unit_cost": 10258.56
+      },
+      {
+        "cat": "armors",
+        "enchant": ".1",
+        "item": "Hunter Jacket",
+        "orig_profit": 1569,
+        "orig_sell": 9480,
+        "qty": 1,
+        "unit_cost": 7531.392
+      },
+      {
+        "cat": "armors",
+        "enchant": ".0",
+        "item": "Knight Armor",
+        "orig_profit": 2507,
+        "orig_sell": 8690,
+        "qty": 10,
+        "unit_cost": 5834.816
+      },
+      {
+        "cat": "armors",
+        "enchant": ".1",
+        "item": "Knight Armor",
+        "orig_profit": 2785,
+        "orig_sell": 13588,
+        "qty": 1,
+        "unit_cost": 10258.56
+      },
+      {
+        "cat": "armors",
+        "enchant": ".0",
+        "item": "Mage Robe",
+        "orig_profit": 2433,
+        "orig_sell": 7426,
+        "qty": 10,
+        "unit_cost": 4695.104
+      },
+      {
+        "cat": "armors",
+        "enchant": ".0",
+        "item": "Scholar Robe",
+        "orig_profit": 2737,
+        "orig_sell": 7742,
+        "qty": 10,
+        "unit_cost": 4695.104
+      },
+      {
+        "cat": "armors",
+        "enchant": ".1",
+        "item": "Scholar Robe",
+        "orig_profit": 1056,
+        "orig_sell": 7900,
+        "qty": 1,
+        "unit_cost": 6527.360000000001
+      },
+      {
+        "cat": "armors",
+        "enchant": ".0",
+        "item": "Soldier Armor",
+        "orig_profit": 2810,
+        "orig_sell": 9006,
+        "qty": 10,
+        "unit_cost": 5834.816
+      },
+      {
+        "cat": "artifact_armors",
+        "enchant": ".1",
+        "item": "Druid Robe",
+        "orig_profit": 17871,
+        "orig_sell": 25988,
+        "qty": 1,
+        "unit_cost": 7077.360000000001
+      },
+      {
+        "cat": "artifact_helmets",
+        "enchant": ".1",
+        "item": "Druid Cowl",
+        "orig_profit": 9002,
+        "orig_sell": 13350,
+        "qty": 1,
+        "unit_cost": 3813.6800000000003
+      },
+      {
+        "cat": "artifact_helmets",
+        "enchant": ".0",
+        "item": "Stalker Hood",
+        "orig_profit": 6732,
+        "orig_sell": 9900,
+        "qty": 10,
+        "unit_cost": 2771.984
+      },
+      {
+        "cat": "artifact_helmets",
+        "enchant": ".1",
+        "item": "Stalker Hood",
+        "orig_profit": 8215,
+        "orig_sell": 12638,
+        "qty": 1,
+        "unit_cost": 3917.1040000000003
+      },
+      {
+        "cat": "artifact_shoes",
+        "enchant": ".0",
+        "item": "Druid Sandals",
+        "orig_profit": 5656,
+        "orig_sell": 8910,
+        "qty": 10,
+        "unit_cost": 2897.552
+      },
+      {
+        "cat": "artifact_shoes",
+        "enchant": ".1",
+        "item": "Graveguard Boots",
+        "orig_profit": 6111,
+        "orig_sell": 12282,
+        "qty": 1,
+        "unit_cost": 5679.28
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".0",
+        "item": "Carrioncaller",
+        "orig_profit": 7666,
+        "orig_sell": 19750,
+        "qty": 10,
+        "unit_cost": 11293.616
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".0",
+        "item": "Clarent Blade",
+        "orig_profit": 9988,
+        "orig_sell": 18711,
+        "qty": 10,
+        "unit_cost": 7973.968
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".1",
+        "item": "Clarent Blade",
+        "orig_profit": 10511,
+        "orig_sell": 24564,
+        "qty": 1,
+        "unit_cost": 13069.744
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".0",
+        "item": "Druidic Staff",
+        "orig_profit": 6473,
+        "orig_sell": 14553,
+        "qty": 10,
+        "unit_cost": 7497.679999999999
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".1",
+        "item": "Druidic Staff",
+        "orig_profit": 522,
+        "orig_sell": 10680,
+        "qty": 1,
+        "unit_cost": 9730.48
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".0",
+        "item": "Heron Spear",
+        "orig_profit": 7043,
+        "orig_sell": 15741,
+        "qty": 10,
+        "unit_cost": 8067.535999999999
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".0",
+        "item": "Hoarfrost Staff",
+        "orig_profit": 7043,
+        "orig_sell": 15741,
+        "qty": 10,
+        "unit_cost": 8067.535999999999
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".1",
+        "item": "Hoarfrost Staff",
+        "orig_profit": -8520,
+        "orig_sell": 3204,
+        "qty": 1,
+        "unit_cost": 11596.08
+      },
+      {
+        "cat": "artifact_weapons",
+        "enchant": ".0",
+        "item": "Lifetouch Staff",
+        "orig_profit": 8754,
+        "orig_sell": 16929,
+        "qty": 10,
+        "unit_cost": 7497.679999999999
+      },
+      {
+        "cat": "helmets",
+        "enchant": ".1",
+        "item": "Mage Cowl",
+        "orig_profit": 983,
+        "orig_sell": 4424,
+        "qty": 1,
+        "unit_cost": 3263.6800000000003
+      },
+      {
+        "cat": "helmets",
+        "enchant": ".1",
+        "item": "Mercenary Hood",
+        "orig_profit": -2457,
+        "orig_sell": 948,
+        "qty": 1,
+        "unit_cost": 3367.1040000000003
+      },
+      {
+        "cat": "offhands",
+        "enchant": ".0",
+        "item": "Shield",
+        "orig_profit": 4444,
+        "orig_sell": 7347,
+        "qty": 10,
+        "unit_cost": 2608.736
+      },
+      {
+        "cat": "offhands",
+        "enchant": ".0",
+        "item": "Torch",
+        "orig_profit": 2833,
+        "orig_sell": 5372,
+        "qty": 10,
+        "unit_cost": 2323.808
+      },
+      {
+        "cat": "offhands",
+        "enchant": ".1",
+        "item": "Torch",
+        "orig_profit": 4624,
+        "orig_sell": 8058,
+        "qty": 1,
+        "unit_cost": 3111.04
+      },
+      {
+        "cat": "shoes",
+        "enchant": ".0",
+        "item": "Cleric Sandals",
+        "orig_profit": 837,
+        "orig_sell": 3318,
+        "qty": 10,
+        "unit_cost": 2347.552
+      },
+      {
+        "cat": "shoes",
+        "enchant": ".1",
+        "item": "Guardian Boots",
+        "orig_profit": 1392,
+        "orig_sell": 6794,
+        "qty": 1,
+        "unit_cost": 5129.28
+      },
+      {
+        "cat": "shoes",
+        "enchant": ".1",
+        "item": "Knight Boots",
+        "orig_profit": -4977,
+        "orig_sell": 158,
+        "qty": 1,
+        "unit_cost": 5129.28
+      },
+      {
+        "cat": "shoes",
+        "enchant": ".1",
+        "item": "Mage Sandals",
+        "orig_profit": -2808,
+        "orig_sell": 474,
+        "qty": 1,
+        "unit_cost": 3263.6800000000003
+      },
+      {
+        "cat": "shoes",
+        "enchant": ".1",
+        "item": "Scholar Sandals",
+        "orig_profit": 1135,
+        "orig_sell": 4582,
+        "qty": 1,
+        "unit_cost": 3263.6800000000003
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Arcane Staff",
+        "orig_profit": 1937,
+        "orig_sell": 9006,
+        "qty": 10,
+        "unit_cost": 6708.063999999999
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Arcane Staff",
+        "orig_profit": -758,
+        "orig_sell": 9500,
+        "qty": 1,
+        "unit_cost": 9878.72
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Claymore",
+        "orig_profit": 3512,
+        "orig_sell": 13904,
+        "qty": 10,
+        "unit_cost": 9835.456
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Divine Staff",
+        "orig_profit": 10750,
+        "orig_sell": 20856,
+        "qty": 10,
+        "unit_cost": 9271.488
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Divine Staff",
+        "orig_profit": 9584,
+        "orig_sell": 22788,
+        "qty": 1,
+        "unit_cost": 12291.52
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Dual Swords",
+        "orig_profit": -12845,
+        "orig_sell": 3798,
+        "qty": 1,
+        "unit_cost": 16491.456
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Enigmatic Staff",
+        "orig_profit": 4009,
+        "orig_sell": 13588,
+        "qty": 10,
+        "unit_cost": 9035.328000000001
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Frost Staff",
+        "orig_profit": 3089,
+        "orig_sell": 14725,
+        "qty": 1,
+        "unit_cost": 11046.08
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Glacial Staff",
+        "orig_profit": 6255,
+        "orig_sell": 17064,
+        "qty": 10,
+        "unit_cost": 10126.271999999999
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Glacial Staff",
+        "orig_profit": -8405,
+        "orig_sell": 6963,
+        "qty": 1,
+        "unit_cost": 15089.920000000002
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Glaive",
+        "orig_profit": -5367,
+        "orig_sell": 10128,
+        "qty": 1,
+        "unit_cost": 15089.920000000002
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Great Cursed Staff",
+        "orig_profit": 11040,
+        "orig_sell": 27219,
+        "qty": 1,
+        "unit_cost": 15089.920000000002
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Great Frost Staff",
+        "orig_profit": 7165,
+        "orig_sell": 18012,
+        "qty": 10,
+        "unit_cost": 10126.271999999999
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Great Frost Staff",
+        "orig_profit": 40816,
+        "orig_sell": 58236,
+        "qty": 1,
+        "unit_cost": 15089.920000000002
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Great Hammer",
+        "orig_profit": -7388,
+        "orig_sell": 10761,
+        "qty": 1,
+        "unit_cost": 17718.72
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Great Holy Staff",
+        "orig_profit": 4986,
+        "orig_sell": 14852,
+        "qty": 10,
+        "unit_cost": 9271.488
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Great Nature Staff",
+        "orig_profit": 1952,
+        "orig_sell": 11692,
+        "qty": 10,
+        "unit_cost": 9271.488
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Greataxe",
+        "orig_profit": 7457,
+        "orig_sell": 18960,
+        "qty": 10,
+        "unit_cost": 10743.616
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Heavy Mace",
+        "orig_profit": 4765,
+        "orig_sell": 23421,
+        "qty": 1,
+        "unit_cost": 17718.72
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Holy Staff",
+        "orig_profit": 7158,
+        "orig_sell": 14694,
+        "qty": 10,
+        "unit_cost": 6947.679999999999
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Holy Staff",
+        "orig_profit": -2796,
+        "orig_sell": 6650,
+        "qty": 1,
+        "unit_cost": 9180.48
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Infernal Staff",
+        "orig_profit": -5974,
+        "orig_sell": 9495,
+        "qty": 1,
+        "unit_cost": 15089.920000000002
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Iron-clad Staff",
+        "orig_profit": 623,
+        "orig_sell": 11692,
+        "qty": 10,
+        "unit_cost": 10601.152
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Light Crossbow",
+        "orig_profit": 4768,
+        "orig_sell": 12798,
+        "qty": 10,
+        "unit_cost": 7517.535999999999
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Morning Star",
+        "orig_profit": 5869,
+        "orig_sell": 17380,
+        "qty": 10,
+        "unit_cost": 10814.848
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Morning Star",
+        "orig_profit": 5373,
+        "orig_sell": 24054,
+        "qty": 1,
+        "unit_cost": 17718.72
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".0",
+        "item": "Pike",
+        "orig_profit": 4131,
+        "orig_sell": 14852,
+        "qty": 10,
+        "unit_cost": 10126.271999999999
+      },
+      {
+        "cat": "weapons",
+        "enchant": ".1",
+        "item": "Pike",
+        "orig_profit": -2936,
+        "orig_sell": 12660,
+        "qty": 1,
+        "unit_cost": 15089.920000000002
+      }
+    ],
+    "notes": "Setup Saved",
+    "original_gear_rev": 0,
+    "revenue": 4035803,
+    "setup": {
+      "buy_city": "Lymhurst",
+      "craft_city": "Lymhurst",
+      "frag_cities": {
+        "relic": "Lymhurst",
+        "rune": "Lymhurst",
+        "soul": "Lymhurst"
+      },
+      "q0": 10,
+      "q1": 1,
+      "q2": 0,
+      "q3": 0,
+      "q4": 0,
+      "raw_cities": {
+        "fiber": "Thetford",
+        "hide": "Bridgewatch",
+        "ore": "Fort Sterling",
+        "wood": "Lymhurst"
+      },
+      "refine_cities": {
+        "cloth": "Lymhurst",
+        "leather": "Martlock",
+        "plank": "Fort Sterling",
+        "steel": "Thetford"
+      },
+      "route_from": "Fort Sterling",
+      "route_to": "Lymhurst",
+      "selected_items": {
+        "Arcane Staff": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Assassin Hood": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Assassin Jacket": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Assassin Shoes": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Battleaxe": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Bear Paws": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Bedrock Mace": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Black Monk Stave": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Blazing Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Blight Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Bloodletter": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Boltcasters": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Bow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Bow of Badon": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Brimstone Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Broadsword": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Caitiff Shield": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Camlann Mace": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Carrioncaller": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Carving Sword": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Clarent Blade": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Claws": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Claymore": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cleric Cowl": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cleric Robe": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cleric Sandals": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Crossbow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cryptcandle": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cultist Cowl": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cultist Robe": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cultist Sandals": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cursed Skull": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Cursed Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Dagger": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Dagger Pair": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Damnation Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Deathgivers": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Demon Armor": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Demon Boots": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Demon Fang": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Demon Helmet": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Demonic Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Divine Staff": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Double Bladed Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Druid Cowl": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Druid Robe": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Druid Sandals": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Druidic Staff": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Dual Swords": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Enigmatic Staff": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Evensong": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Eye of Secrets": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Facebreaker": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Fallen Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Fiend Cowl": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Fiend Robe": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Fiend Sandals": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Fire Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Forge Hammers": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Frost Staff": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Galatine Pair": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Glacial Staff": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Glaive": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Graveguard Armor": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Graveguard Boots": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Graveguard Helmet": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Great Arcane Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Great Cursed Staff": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Great Fire Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Great Frost Staff": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Great Hammer": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Great Holy Staff": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Great Nature Staff": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Greataxe": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Grovekeeper": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Guardian Armor": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Guardian Boots": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Guardian Helmet": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Halberd": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hammer": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Heavy Crossbow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Heavy Mace": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hellion Hood": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hellion Jacket": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hellion Shoes": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Heron Spear": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hoarfrost Staff": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Holy Staff": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hunter Hood": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hunter Jacket": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Hunter Shoes": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Icicle Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Incubus Mace": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Infernal Scythe": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Infernal Staff": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Iron-clad Staff": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Judicator Armor": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Judicator Boots": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Judicator Helmet": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Knight Armor": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Knight Boots": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Knight Helmet": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Leering Cane": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Lifecurse Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Lifetouch Staff": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Light Crossbow": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Longbow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mace": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mage Cowl": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mage Robe": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mage Sandals": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mercenary Hood": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mercenary Jacket": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mercenary Shoes": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Mistcaller": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Morning Star": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Muisak": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Nature Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Occult Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Permafrost Prism": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Pike": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Polehammer": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Quarterstaff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Rampant Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Redemption Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Sarcophagus": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Scholar Cowl": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Scholar Robe": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Scholar Sandals": {
+          ".0": false,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Shield": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Siegebow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Soldier Armor": {
+          ".0": true,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Soldier Boots": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Soldier Helmet": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Soulscythe": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Spear": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Specter Hood": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Specter Jacket": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Specter Shoes": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Spirithunter": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Staff of Balance": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Stalker Hood": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Stalker Jacket": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Stalker Shoes": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Taproot": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Tombhammer": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Tome of Spells": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Torch": {
+          ".0": true,
+          ".1": true,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Trinity Spear": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Wailing Bow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Warbow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Weeping Repeater": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Whispering Bow": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Wild Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Wildfire Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        },
+        "Witchwork Staff": {
+          ".0": false,
+          ".1": false,
+          ".2": false,
+          ".3": false,
+          ".4": false
+        }
+      },
+      "sell_city": "Black Market",
+      "tier": 4,
+      "use_multi_refine": false
+    }
+  }
+]

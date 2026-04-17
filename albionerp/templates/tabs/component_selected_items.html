@@ -1,0 +1,57 @@
+{% raw %}
+<!-- 📋 SELECTED ITEMS DETAIL (SHARED TABLE) -->
+<div v-if="!cfg.use_refine_only" class="glass-card overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-[#050A14] border-b border-[#1E2D45]">
+                    <th class="p-4 section-label cursor-pointer hover:text-white transition-colors" @click="toggleSort('cat')">Cat <span v-if="sortKey==='cat'">{{sortDesc?'↓':'↑'}}</span></th>
+                    <th class="p-4 section-label cursor-pointer hover:text-white transition-colors" @click="toggleSort('item')">Item Model <span v-if="sortKey==='item'">{{sortDesc?'↓':'↑'}}</span></th>
+                    <th class="p-4 section-label text-center">Enc</th>
+                    <th class="p-4 section-label text-right cursor-pointer hover:text-white transition-colors" @click="toggleSort('profit')">Unit Profit <span v-if="sortKey==='profit'">{{sortDesc?'↓':'↑'}}</span></th>
+                    <th class="p-4 section-label text-right cursor-pointer hover:text-white transition-colors" @click="toggleSort('margin')">Margin <span v-if="sortKey==='margin'">{{sortDesc?'↓':'↑'}}</span></th>
+                    <th class="p-4 section-label text-center">Qty Override</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-[#1E2D45]/50">
+                <tr v-for="row in selectedItemList" :key="row.item + row.enchant" 
+                    v-show="(activeTab === 'dashboard' || activeListItemTab === 'gear' && !row.cat.toLowerCase().includes('food') && !row.cat.toLowerCase().includes('potion') && !row.cat.toLowerCase().includes('luxury')) || (activeListItemTab === 'consumable' && (row.cat.toLowerCase().includes('food') || row.cat.toLowerCase().includes('potion')))"
+                    class="hover:bg-white/5 transition-colors group">
+                    <td class="p-4">
+                        <span class="text-[10px] font-black text-gray-500 uppercase tracking-tighter px-2 py-0.5 bg-black/40 rounded border border-[#1E2D45]">{{ row.cat }}</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-black text-gray-200 uppercase tracking-wide group-hover:text-white">{{ getRealName(row.item) }}</span>
+                            <span class="text-[9px] text-gray-600 font-mono">{{ row.item }}</span>
+                        </div>
+                    </td>
+                    <td class="p-4 text-center">
+                        <span class="text-xs font-black" :class="'enc-' + row.enchant.replace('.','')">{{ row.enchant }}</span>
+                    </td>
+                    <td class="p-4 text-right mono text-xs font-bold" :class="row.profit >= 0 ? 'text-emerald-400' : 'text-rose-500'">
+                        {{ row.profit.toLocaleString() }}
+                    </td>
+                    <td class="p-4 text-right">
+                        <span class="text-[10px] font-black px-2 py-1 rounded" :class="row.margin >= 15 ? 'bg-emerald-500/10 text-emerald-500' : row.margin > 0 ? 'bg-amber-500/10 text-amber-500' : 'bg-rose-500/10 text-rose-500'">
+                            {{ typeof row.margin === 'number' ? row.margin.toFixed(2) : row.margin }}%
+                        </span>
+                    </td>
+                    <td class="p-4 text-center">
+                        <input type="number" 
+                               :value="cfg.adjusted_qty_crafts?.[row.item]?.[row.enchant]" 
+                               @input="setCraftQty(row.item, row.enchant, $event.target.value)"
+                               placeholder="Auto"
+                               class="input-pro w-20 py-1.5 text-center text-xs rounded-lg font-black mono placeholder:text-gray-700">
+                    </td>
+                </tr>
+                <tr v-if="selectedItemList.length === 0">
+                    <td colspan="6" class="p-12 text-center text-gray-600 italic uppercase tracking-[0.2em] text-xs">
+                        System Database Empty. Run AI Optimizer or select items in Price DB.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endraw %}

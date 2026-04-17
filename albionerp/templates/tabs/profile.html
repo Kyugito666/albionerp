@@ -1,0 +1,263 @@
+{% raw %}
+<div v-if="activeTab === 'profile'">
+    <div class="glass-card p-6 border border-gray-800/60 shadow-2xl backdrop-blur-xl bg-[#0B1120]/80 flex flex-col gap-6">
+        <!-- 👤 PROFILE HEADER -->
+        <div class="flex justify-between items-center border-b border-gray-700/50 pb-4">
+            <span class="text-sm font-black text-yellow-400 uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="user-circle" class="w-5 h-5"></i> Profile / Account
+            </span>
+            <div class="flex gap-2 items-center">
+                <select v-model="cfg.active_profile" @change="saveAndFetch" class="input-pro px-3 py-1.5 rounded-lg font-bold text-sm min-w-[120px] bg-[#090F1C] border border-gray-700 focus:border-yellow-500 text-white shadow-inner">
+                    <option v-for="(_, name) in cfg.profiles" :key="name" :value="name">{{ name }}</option>
+                </select>
+                <button @click="addProfile" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg font-black text-sm shadow-[0_0_10px_rgba(16,185,129,0.3)] transition-all">+</button>
+                <button @click="deleteProfile" v-if="cfg.active_profile !== 'Default'" class="bg-rose-600 hover:bg-rose-500 text-white px-3 py-1.5 rounded-lg font-black text-sm shadow-[0_0_10px_rgba(244,63,94,0.3)] transition-all">−</button>
+            </div>
+        </div>
+        
+        <!-- 💎 REFINING SPECS (GEAR MODE + REFINE ON, or REFINE ONLY MODE) -->
+        <div v-if="!cfg.use_multi_consumables && (cfg.do_refine !== false || cfg.use_refine_only) && cfg.profiles[cfg.active_profile]">
+            <p class="text-xs font-black text-blue-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="gem" class="w-4 h-4"></i> Refining Mastery per Resource
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div v-for="rmat in ['fiber','hide','ore','wood','stone']" :key="'sp'+rmat" class="bg-black/20 p-3 rounded-xl border border-gray-800 shadow-inner">
+                    <span class="text-[10px] font-black text-gray-500 uppercase block mb-2 flex items-center gap-1.5">
+                        <i v-if="rmat==='fiber'" data-lucide="sprout" class="w-3 h-3 text-emerald-400"></i>
+                        <i v-if="rmat==='hide'" data-lucide="paw-print" class="w-3 h-3 text-orange-400"></i>
+                        <i v-if="rmat==='ore'" data-lucide="mountain" class="w-3 h-3 text-cyan-400"></i>
+                        <i v-if="rmat==='wood'" data-lucide="trees" class="w-3 h-3 text-amber-600"></i>
+                        <i v-if="rmat==='stone'" data-lucide="landmark" class="w-3 h-3 text-gray-400"></i>
+                        {{ rmat }}
+                    </span>
+                    <input type="number" v-model="cfg.profiles[cfg.active_profile][rmat].s" @change="saveAndFetch" placeholder="Spec Lvl" class="input-pro px-2 py-2 w-full rounded-lg text-center text-blue-300 font-black text-xs bg-[#050912] border border-gray-700 focus:border-blue-500 shadow-inner">
+                </div>
+            </div>
+        </div>
+
+        <!-- 🛠️ GEAR CRAFTING NODES (ONLY IN GEAR MODE + CRAFT ON + NOT REFINE ONLY) -->
+        <div class="border-t border-gray-700/50 pt-4 mt-2" v-if="!cfg.use_multi_consumables && !cfg.use_refine_only && cfg.do_craft !== false && cfg.profiles[cfg.active_profile]">
+            <div class="flex justify-between items-center mb-4">
+                <p class="text-xs font-black text-amber-400 uppercase tracking-widest flex items-center gap-2">
+                    <i data-lucide="hammer" class="w-4 h-4"></i> Gear Mastery Nodes
+                </p>
+                <label class="flex items-center gap-2 text-[10px] font-black cursor-pointer transition-all bg-black/40 px-3 py-1.5 rounded-full border shadow-inner group" :class="cfg.use_multi_tier ? 'text-emerald-400 border-emerald-900/50 hover:bg-emerald-900/30' : 'text-gray-500 border-gray-800 hover:text-gray-300'">
+                    <input type="checkbox" v-model="cfg.use_multi_tier" @change="saveAndFetch" class="hidden">
+                    <span :class="cfg.use_multi_tier ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-gray-600'" class="w-1.5 h-1.5 rounded-full transition-all duration-300 group-hover:scale-125"></span>
+                    <span>{{ cfg.use_multi_tier ? 'STRICT ON' : 'OFF (GLOBAL)' }}</span>
+                </label>
+            </div>
+            
+            <div :class="!cfg.use_multi_tier ? 'opacity-30 pointer-events-none grayscale transition-all' : 'transition-all'">
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
+                    <template v-for="(lvl, node) in cfg.profiles[cfg.active_profile].main_specs" :key="node">
+                        <div v-if="node !== 'Chef' && node !== 'Alchemist'"
+                             class="flex items-center gap-1.5 bg-black/40 p-2 rounded-xl border border-gray-800 shadow-inner group">
+                            <button @click="delete cfg.profiles[cfg.active_profile].main_specs[node]; saveAndFetch()" class="text-rose-500 hover:text-rose-400 font-black px-1 text-xs transition-colors">×</button>
+                            <i data-lucide="shield-check" class="w-3 h-3 text-emerald-500/50"></i>
+                            <span class="text-[10px] font-bold text-gray-400 truncate w-full group-hover:text-gray-200" :title="node">{{ node }}</span>
+                            <input type="number" v-model.number="cfg.profiles[cfg.active_profile].main_specs[node]" @change="saveAndFetch" placeholder="Lvl" class="input-pro px-1 py-1 w-12 rounded text-emerald-300 font-black text-[10px] text-center bg-[#050912] border border-gray-700 focus:border-emerald-500">
+                        </div>
+                    </template>
+                </div>
+
+                <div class="flex gap-2">
+                    <select ref="newSpecNodeGear" class="input-pro px-3 py-2 flex-1 rounded-lg text-xs font-black bg-[#090F1C] border border-gray-700 text-white focus:border-emerald-500">
+                        <template v-for="(nodes, cat) in SPEC_NODES" :key="cat">
+                            <optgroup v-if="cat !== 'Consumables'" :label="cat">
+                                <option v-for="n in nodes" :value="n">{{ n }}</option>
+                            </optgroup>
+                        </template>
+                    </select>
+                    <button @click="
+                        if(!cfg.profiles[cfg.active_profile].main_specs) { cfg.profiles[cfg.active_profile].main_specs = {}; }
+                        cfg.profiles[cfg.active_profile].main_specs[$refs.newSpecNodeGear.value] = 1;
+                        saveAndFetch();
+                    " class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-xs font-black shadow-[0_0_8px_rgba(16,185,129,0.4)] transition-all uppercase">+ Node</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🍳 CONSUMABLES SPECS (ONLY IN CONSUMABLE MODE) -->
+        <div v-if="cfg.use_multi_consumables && cfg.profiles[cfg.active_profile]">
+            <p class="text-xs font-black text-emerald-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="utensils-crossed" class="w-4 h-4"></i> Consumables Mastery Nodes
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- COOKING SPEC -->
+                <div class="bg-black/20 p-4 rounded-xl border border-gray-800 shadow-inner flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                            <i data-lucide="chef-hat" class="w-4 h-4 text-emerald-400"></i> Chef (Cooking)
+                        </span>
+                        <input type="number" v-model.number="cfg.profiles[cfg.active_profile].main_specs['Chef']" @change="saveAndFetch" placeholder="Lvl" class="input-pro px-2 py-1.5 w-20 rounded-lg text-center text-emerald-300 font-black text-sm bg-[#050912] border border-gray-700 focus:border-emerald-500">
+                    </div>
+                    <p class="text-[10px] text-gray-600 italic uppercase">Mempengaruhi focus cost untuk semua masakan (food).</p>
+                </div>
+                <!-- ALCHEMY SPEC -->
+                <div class="bg-black/20 p-4 rounded-xl border border-gray-800 shadow-inner flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                            <i data-lucide="flask-conical" class="w-4 h-4 text-blue-400"></i> Alchemist (Alchemy)
+                        </span>
+                        <input type="number" v-model.number="cfg.profiles[cfg.active_profile].main_specs['Alchemist']" @change="saveAndFetch" placeholder="Lvl" class="input-pro px-2 py-1.5 w-20 rounded-lg text-center text-blue-300 font-black text-sm bg-[#050912] border border-gray-700 focus:border-blue-500">
+                    </div>
+                    <p class="text-[10px] text-gray-600 italic uppercase">Mempengaruhi focus cost untuk semua potion.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🎮 FOCUS & FEE CONTROLS (FLEXIBLE) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-700/50 pt-5 mt-2">
+            <!-- LEFT CONTROL -->
+            <div class="bg-black/20 p-5 rounded-2xl border border-gray-800 shadow-inner">
+                <div v-if="!cfg.use_multi_consumables && cfg.do_refine !== false">
+                    <p class="text-xs font-black text-indigo-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="gem" class="w-4 h-4"></i> Refining Stage
+                    </p>
+                    <label class="flex items-center gap-3 text-xs font-bold text-gray-300 cursor-pointer mb-4 hover:text-white transition-colors">
+                        <input type="checkbox" v-model="cfg.focus_refine" @change="saveAndFetch" class="accent-blue-500 w-4 h-4"> Use Focus Points
+                    </label>
+                    <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase">Station Fee %</span>
+                        <input type="number" v-model="cfg.fee_refine" @change="saveAndFetch" placeholder="0" class="input-pro px-2 py-1 rounded-lg w-16 text-center font-black text-amber-400 text-xs bg-[#050912] border border-gray-700 focus:border-amber-500">
+                    </div>
+                </div>
+                <div v-else-if="cfg.use_multi_consumables">
+                    <p class="text-xs font-black text-emerald-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="utensils-crossed" class="w-4 h-4"></i> Cooking Stage
+                    </p>
+                    <label class="flex items-center gap-3 text-xs font-bold text-gray-300 cursor-pointer mb-4 hover:text-white transition-colors">
+                        <input type="checkbox" v-model="cfg.focus_cooking" @change="saveAndFetch" class="accent-emerald-500 w-4 h-4"> Use Focus (Cooking)
+                    </label>
+                    <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase">Kitchen Fee %</span>
+                        <input type="number" v-model="cfg.fee_cooking" @change="saveAndFetch" placeholder="0" class="input-pro px-2 py-1 rounded-lg w-16 text-center font-black text-amber-400 text-xs bg-[#050912] border border-gray-700 focus:border-amber-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT CONTROL -->
+            <div class="bg-black/20 p-5 rounded-2xl border border-gray-800 shadow-inner">
+                <div v-if="!cfg.use_multi_consumables && cfg.do_craft !== false">
+                    <p class="text-xs font-black text-emerald-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="hammer" class="w-4 h-4"></i> Gear Crafting
+                    </p>
+                    <label class="flex items-center gap-3 text-xs font-bold text-gray-300 cursor-pointer mb-3 hover:text-white transition-colors">
+                        <input type="checkbox" v-model="cfg.focus_craft" @change="saveAndFetch" class="accent-emerald-500 w-4 h-4"> Use Focus Points
+                    </label>
+                    <label class="flex items-center gap-3 text-xs font-bold text-purple-400 cursor-pointer mb-4 hover:text-purple-300 transition-colors">
+                        <input type="checkbox" v-model="cfg.use_own_journals" @change="saveAndFetch" class="accent-purple-500 w-4 h-4"> Fill Local Journals
+                    </label>
+                    <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase">Station Fee %</span>
+                        <input type="number" v-model="cfg.fee_craft" @change="saveAndFetch" placeholder="0" class="input-pro px-2 py-1 rounded-lg w-16 text-center font-black text-amber-400 text-xs bg-[#050912] border border-gray-700 focus:border-amber-500">
+                    </div>
+                </div>
+                <div v-else-if="cfg.use_multi_consumables">
+                    <p class="text-xs font-black text-blue-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="flask-conical" class="w-4 h-4"></i> Alchemy Stage
+                    </p>
+                    <label class="flex items-center gap-3 text-xs font-bold text-gray-300 cursor-pointer mb-4 hover:text-white transition-colors">
+                        <input type="checkbox" v-model="cfg.focus_alchemy" @change="saveAndFetch" class="accent-blue-500 w-4 h-4"> Use Focus (Alchemy)
+                    </label>
+                    <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase">Lab Fee %</span>
+                        <input type="number" v-model="cfg.fee_alchemy" @change="saveAndFetch" placeholder="0" class="input-pro px-2 py-1 rounded-lg w-16 text-center font-black text-amber-400 text-xs bg-[#050912] border border-gray-700 focus:border-amber-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📦 GEAR LOADOUT -->
+        <div class="border-t border-gray-700/50 pt-5">
+            <p class="text-xs font-black text-cyan-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="package" class="w-5 h-5"></i> Transport Gear Loadout
+            </p>
+            <div class="flex flex-col gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-black/20 p-3 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase block mb-2 flex items-center gap-2">
+                            <i data-lucide="truck" class="w-3 h-3"></i> Mount Type
+                        </span>
+                        <div class="flex flex-wrap gap-1.5 w-full">
+                            <select v-model="cfg.gear.mount.type" @change="saveAndFetch" class="input-pro px-2 py-2 rounded-lg flex-1 text-xs font-bold bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option value="ox">Ox</option><option value="boar">Boar</option><option value="bear">Bear</option>
+                            </select>
+                            <select v-model="cfg.gear.mount.t" @change="saveAndFetch" class="input-pro px-1 py-2 rounded-lg w-16 text-xs font-bold text-center bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option v-for="n in [3,4,5,6,7,8]" :value="n">T{{n}}</option>
+                            </select>
+                            <select v-model="cfg.gear.mount.q" @change="saveAndFetch" class="input-pro px-1 py-2 rounded-lg w-14 text-xs font-bold text-center bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option value="normal">N</option><option value="good">G</option><option value="outstanding">O</option><option value="excellent">E</option><option value="masterpiece">M</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-3 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase block mb-2 flex items-center gap-2">
+                            <i data-lucide="briefcase" class="w-3 h-3"></i> Bag Capacity
+                        </span>
+                        <div class="flex flex-wrap gap-1.5 w-full">
+                            <select v-model="cfg.gear.bag.t" @change="saveAndFetch" class="input-pro px-2 py-2 rounded-lg flex-1 text-xs font-bold bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option v-for="n in [4,5,6,7,8]" :value="n">T{{n}}</option>
+                            </select>
+                            <select v-model="cfg.gear.bag.e" @change="saveAndFetch" class="input-pro px-1 py-2 rounded-lg w-16 text-xs font-bold text-center bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option v-for="n in [0,1,2,3,4]" :value="n">.{{n}}</option>
+                            </select>
+                            <select v-model="cfg.gear.bag.q" @change="saveAndFetch" class="input-pro px-1 py-2 rounded-lg w-14 text-xs font-bold text-center bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option value="normal">N</option><option value="good">G</option><option value="outstanding">O</option><option value="excellent">E</option><option value="masterpiece">M</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-black/20 p-3 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase block mb-2 flex items-center gap-2">
+                            <i data-lucide="footprints" class="w-3 h-3"></i> Boots (Weight Spec)
+                        </span>
+                        <div class="flex flex-wrap gap-1.5 w-full">
+                            <select v-model="cfg.gear.boots.t" @change="saveAndFetch" class="input-pro px-1 py-2 rounded-lg flex-1 text-xs font-bold bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option v-for="n in [4,5,6,7,8]" :value="n">T{{n}}</option>
+                            </select>
+                            <select v-model="cfg.gear.boots.e" @change="saveAndFetch" class="input-pro px-1 py-2 rounded-lg w-14 text-xs font-bold text-center bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option v-for="n in [0,1,2,3,4]" :value="n">.{{n}}</option>
+                            </select>
+                            <select v-model="cfg.gear.boots.q" @change="saveAndFetch" class="input-pro px-1 py-2 rounded-lg w-12 text-xs font-bold text-center bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                                <option value="normal">N</option><option value="good">G</option><option value="outstanding">O</option><option value="excellent">E</option><option value="masterpiece">M</option>
+                            </select>
+                            <input type="number" v-model="cfg.gear.boots.s" @change="saveAndFetch" placeholder="Spec" class="input-pro px-1 py-2 rounded-lg w-16 text-xs font-black text-center text-emerald-400 bg-[#050912] border border-gray-700 focus:border-emerald-500 shadow-inner">
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-3 rounded-xl border border-gray-800">
+                        <span class="text-[10px] font-black text-gray-500 uppercase block mb-2 flex items-center gap-2">
+                            <i data-lucide="sandwich" class="w-3 h-3"></i> Consumed Food (Pie)
+                        </span>
+                        <select v-model="cfg.gear.food" @change="saveAndFetch" class="input-pro px-3 py-2 rounded-lg w-full text-xs font-bold bg-[#050912] border border-gray-700 text-white focus:border-cyan-500">
+                            <option value="none">None</option>
+                            <option value="pie_7_0">7.0 (+30%)</option>
+                            <option value="pie_7_1">7.1 (+31.5%)</option>
+                            <option value="pie_7_2">7.2 (+33%)</option>
+                            <option value="pie_7_3">7.3 (+34.5%)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🤖 AI CONFIGURATION -->
+        <div class="border-t border-gray-700/50 pt-5">
+            <p class="text-xs font-black text-purple-400 mb-4 uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="bot" class="w-5 h-5"></i> Smart Analyzer LLM (Gemini API)
+            </p>
+            <div class="bg-black/20 p-4 rounded-xl border border-gray-800 shadow-inner flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="key" class="w-4 h-4 text-purple-400"></i> API Key (Multi-Key)
+                    </span>
+                    <input type="password" v-model="cfg.gemini_api_key" @change="saveAndFetch" placeholder="Key1, Key2, Key3..." class="input-pro px-3 py-2 w-2/3 rounded-lg text-purple-300 font-bold text-xs bg-[#050912] border border-gray-700 focus:border-purple-500">
+                </div>
+                <p class="text-[10px] text-gray-600 italic">Masukkan Google Gemini API Key. Bisa masukkan banyak key sekaligus (pisahkan dengan koma) untuk fitur Auto-Rotate mencegah rate limit.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endraw %}

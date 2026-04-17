@@ -1,0 +1,34 @@
+{% raw %}
+<div v-if="activeTab === 'prices'">
+    <div v-if="Object.keys(pricesData).length > 0 && data">
+        
+        <!-- 🟢 GLOBAL HEADER -->
+        <div class="glass-card p-4 md:p-8 mb-8 overflow-x-auto border border-gray-800/60 shadow-[0_8px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl bg-[#0B1120]/80">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-black text-gray-200 drop-shadow-md">Price Intelligence Database</h2>
+                    <span class="text-xs text-gray-500 tracking-widest uppercase mt-1">Direct Uplink: Albion Data Project (ADC)</span>
+                </div>
+                <div class="flex gap-3">
+                    <button @click="fetchFromADC" :disabled="isFetchingADC" class="text-sm font-black bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white px-5 py-2 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] transition-all flex items-center gap-2 transform hover:-translate-y-0.5">
+                        <span v-show="!isFetchingADC" class="flex items-center"><i data-lucide="globe" class="w-4 h-4"></i></span>
+                        <span v-show="isFetchingADC" class="flex items-center"><i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i></span>
+                        <span v-if="!isFetchingADC">FETCH FROM ADC (ASIA)</span>
+                        <span v-else>FETCHING API...</span>
+                    </button>
+                    <button @click="syncScannedPrices" :disabled="isSyncingScanned || isFetchingADC" class="text-sm font-black bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-gray-900 px-5 py-2 rounded-lg shadow-[0_0_15px_rgba(234,179,8,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)] transition-all flex items-center gap-2 transform hover:-translate-y-0.5">
+                        <span v-show="!isSyncingScanned" class="flex items-center"><i data-lucide="refresh-cw" class="w-4 h-4"></i></span>
+                        <span v-show="isSyncingScanned" class="flex items-center"><i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i></span>
+                        <span v-if="!isSyncingScanned">SYNC SCANNED PRICES</span>
+                        <span v-else>SYNCING...</span>
+                    </button>
+                </div>
+            </div>
+
+            {% endraw %}
+{% include 'tabs/prices_materials.html' %}
+{% include 'tabs/prices_farming.html' %}
+{% include 'tabs/prices_gears.html' %}
+{% include 'tabs/prices_consumables.html' %}
+{% raw %}</div>
+{% endraw %}

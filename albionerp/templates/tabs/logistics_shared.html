@@ -1,0 +1,203 @@
+{% raw %}
+<!-- 🚛 LOGISTICS REFINE & CRAFT SHARED CALIBRATOR -->
+    <div v-if="activeTab === 'logistics_refine' || activeTab === 'logistics_craft'">
+        <div class="glass-card p-6 mb-6">
+            
+            <div class="mb-6 border-b border-[#1E2D45] pb-6 flex flex-col md:flex-row justify-between md:items-end gap-5">
+                <div>
+                    <h2 class="text-2xl font-black text-indigo-400 uppercase tracking-wide flex items-center gap-3">
+                        <i data-lucide="truck" class="w-8 h-8"></i>
+                        {{ activeTab === 'logistics_refine' ? 'RAW TO REFINE' : 'REFINE TO CRAFT' }}
+                    </h2>
+                    <p class="text-sm text-gray-500 mt-1">Pilih rute transportasi. Kalkulasi slot dan beban disesuaikan real-time.</p>
+                </div>
+                
+                <div class="flex items-center gap-3 bg-[#090F1C] border border-[#1E2D45] p-3 rounded-xl shadow-lg">
+                    <div class="flex flex-col">
+                        <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Berangkat Dari</span>
+                        <select v-model="cfg.route_from" @change="saveAndFetch" class="input-pro px-3 py-1.5 rounded text-sm font-bold text-cyan-400 outline-none">
+                            <option v-for="c in ALL_ROYAL_CITIES" :value="c">{{ c }}</option>
+                        </select>
+                    </div>
+                    <i data-lucide="arrow-right" class="w-5 h-5 text-gray-600"></i>
+                    <div class="flex flex-col">
+                        <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Tujuan Ke</span>
+                        <select v-model="cfg.route_to" @change="saveAndFetch" class="input-pro px-3 py-1.5 rounded text-sm font-bold text-rose-400 outline-none">
+                            <option v-for="c in availableDestinations" :value="c">{{ c }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="!routeLogistics" class="text-center py-16">
+                <div class="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p class="text-gray-500 text-sm font-bold uppercase tracking-widest">Calculating Smart Routes...</p>
+            </div>
+
+            <div v-else class="space-y-6">
+                
+                <!-- CAPACITY CARD (SHARED) -->
+                <div class="data-box p-5 border border-[#1E2D45] bg-[#0A101C]">
+                    <div class="flex justify-between items-end mb-4 border-b border-[#1E2D45] pb-3">
+                        <div>
+                            <h3 class="text-sm font-black text-indigo-400 uppercase tracking-widest">Kapasitas Maksimal Kendaraan</h3>
+                            <p class="text-xs text-gray-500 mt-1">Gabungan beban dari semua items yang diceklis (Raw & Refined).</p>
+                        </div>
+                        <div class="flex flex-col items-end gap-2">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-2xl font-black mono transition-all" :class="routeLogistics.current_total > data.weight_data.max_load ? 'text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.5)]' : 'text-emerald-400'">{{ routeLogistics.current_total.toLocaleString(undefined, {minimumFractionDigits:1, maximumFractionDigits:1}) }}</span>
+                                <span class="text-sm text-gray-500">/ {{ data.weight_data.max_load.toLocaleString() }} kg</span>
+                            </div>
+                            <button @click="clearChecks" class="text-xs font-bold bg-rose-900/50 hover:bg-rose-600 text-rose-200 hover:text-white px-3 py-1 rounded border border-rose-800 transition-all flex items-center gap-2">
+                                <i data-lucide="rotate-ccw" class="w-3 h-3"></i> RESET CHECKLIST
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-black/30 p-4 rounded-xl shadow-inner border border-[#141E30]" v-show="activeTab === 'logistics_refine'">
+                            <div class="flex justify-between items-end mb-2">
+                                <p class="text-xs text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="download" class="w-3 h-3"></i> Beban Mentah (IN)
+                                </p>
+                            </div>
+                            <div class="flex items-baseline gap-1 mb-2">
+                                <span class="text-2xl font-black mono transition-all text-cyan-400">
+                                    {{ routeLogistics.live_in.toLocaleString(undefined, {minimumFractionDigits:1, maximumFractionDigits:1}) }}
+                                </span>
+                                <span class="text-sm text-gray-500">kg</span>
+                            </div>
+                            <p class="text-[10px] text-gray-500 italic">Belum diceklis (dibawa di tas).</p>
+                        </div>
+
+                        <div class="bg-black/30 p-4 rounded-xl shadow-inner border border-[#141E30]" v-show="activeTab === 'logistics_craft'">
+                            <div class="flex justify-between items-end mb-2">
+                                <p class="text-xs text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="upload" class="w-3 h-3"></i> Beban Jadi (OUT)
+                                </p>
+                            </div>
+                            <div class="flex items-baseline gap-1 mb-2">
+                                <span class="text-2xl font-black mono transition-all text-amber-400">
+                                    {{ routeLogistics.live_out.toLocaleString(undefined, {minimumFractionDigits:1, maximumFractionDigits:1}) }}
+                                </span>
+                                <span class="text-sm text-gray-500">kg</span>
+                            </div>
+                            <p class="text-[10px] text-gray-500 italic">Sudah diceklis (disimpan di tas).</p>
+                        </div>
+
+                        <div class="bg-black/30 p-4 rounded-xl shadow-inner border border-[#141E30]" :class="activeTab === 'logistics_refine' ? 'md:col-span-2' : 'md:col-span-2'">
+                            <div class="flex justify-between items-end mb-2">
+                                <p class="text-xs text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="box" class="w-3 h-3"></i> Inventory Slots
+                                </p>
+                                <p class="text-xs font-bold mono transition-all" :class="routeLogistics.live_slots > 48 ? 'text-rose-500' : 'text-purple-400'">
+                                    {{ Math.min((routeLogistics.live_slots / 48) * 100, 999).toFixed(1) }}%
+                                </p>
+                            </div>
+                            <div class="flex items-baseline gap-1 mb-3">
+                                <span class="text-2xl font-black mono transition-all" :class="routeLogistics.live_slots > 48 ? 'text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.5)]' : 'text-purple-400'">
+                                    {{ routeLogistics.live_slots }}
+                                </span>
+                                <span class="text-sm text-gray-500">/ 48</span>
+                            </div>
+                            <div class="w-full bg-[#0D1522] rounded-full h-2.5 overflow-hidden">
+                                <div class="h-full bar-anim rounded-full transition-all" 
+                                     :class="routeLogistics.live_slots > 48 ? 'bg-rose-500 shadow-[0_0_8px_#f43f5e]' : 'bg-purple-500 shadow-[0_0_8px_#a855f7]'" 
+                                     :style="{ width: Math.min((routeLogistics.live_slots / 48) * 100, 100) + '%' }"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REFINE SECTION -->
+                <div v-show="activeTab === 'logistics_refine'" class="data-box border-l-4 border-l-rose-500 p-5">
+
+                    <!-- TASK 4: REFINE ONLY — Total Raw Resource Needed Summary -->
+                    <div v-if="cfg.use_refine_only && data && data.logistics && data.logistics.refine_only_summary_html" class="mb-6 bg-gradient-to-r from-[#0B1120] to-[#090F1C] border border-cyan-900/40 rounded-xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+                        <h3 class="text-sm font-black text-cyan-400 uppercase tracking-widest mb-4 flex items-center gap-2 border-b border-cyan-900/30 pb-3">
+                            <i data-lucide="clipboard-list" class="w-5 h-5"></i> Total Raw Resource Needed (Refine Only)
+                        </h3>
+                        <div v-html="data.logistics.refine_only_summary_html"></div>
+                    </div>
+
+                    <h3 class="text-base font-black text-rose-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <i data-lucide="factory" class="w-5 h-5"></i> Refine di {{ cfg.route_to }}
+                    </h3>
+
+                    <div class="mb-4 bg-[#090F1C] border border-[#1E2D45] p-4 rounded-xl shadow-inner transition-all">
+                        <p class="text-[10px] font-bold text-rose-400 uppercase tracking-widest mb-2 border-b border-[#1E2D45] pb-2 flex items-center gap-2">
+                            <i data-lucide="shopping-cart" class="w-3 h-3"></i> Under-Refine (Beli Lokal di {{ cfg.route_to }}):
+                        </p>
+                        <div v-html="routeLogistics.under_summary"></div>
+                    </div>
+
+                    <div v-if="routeLogistics.refine.length > 0" class="bg-black/20 rounded-lg p-4">
+                        <ul class="manifest-list text-sm text-gray-200 leading-relaxed space-y-3">
+                            <li v-for="task in routeLogistics.refine" :key="task.id || task" class="border-b border-[#1E2D45] pb-3 last:border-0 last:pb-0 flex items-start gap-4 transition-all">
+                                <input type="checkbox" v-model="checkedTasks[task.id || task]" class="mt-1 w-5 h-5 accent-emerald-500 cursor-pointer flex-shrink-0">
+                                <div :class="checkedTasks[task.id || task] ? 'opacity-50 grayscale line-through transition-all' : 'transition-all'" v-html="task.text || task"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <p v-else class="text-sm text-gray-500 italic mt-2">Tidak ada bahan baku yang di-refine di kota ini.</p>
+                </div>
+
+                <!-- CRAFT SECTION -->
+                <div v-show="activeTab === 'logistics_craft'" class="data-box border-l-4 border-l-yellow-500 p-5">
+                    <h3 class="text-base font-black text-yellow-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <i data-lucide="hammer" class="w-5 h-5"></i> Crafting di {{ cfg.route_to }}
+                    </h3>
+
+                    <div class="mb-4 bg-[#090F1C] border border-[#1E2D45] p-4 rounded-xl shadow-inner transition-all">
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3 border-b border-[#1E2D45] pb-2 flex items-center gap-2">
+                            <i data-lucide="package" class="w-3 h-3"></i> Refined Mats (Bawa dari Gudang/Market):
+                        </p>
+                        <div v-html="routeLogistics.mats_summary"></div>
+                    </div>
+
+                    <div class="mb-5 bg-[#090F1C] border border-[#1E2D45] p-4 rounded-xl shadow-inner transition-all">
+                        <p class="text-[10px] font-bold text-purple-400 uppercase tracking-widest mb-3 border-b border-[#1E2D45] pb-2 flex items-center gap-2">
+                            <i data-lucide="book-open" class="w-3 h-3"></i> Journals Needed (Cabut dari Pulau Lokal):
+                        </p>
+                        <div v-html="routeLogistics.journal_summary"></div>
+                    </div>
+
+                    <div v-if="routeLogistics.craft.length > 0" class="bg-black/20 rounded-lg p-4">
+                        <ul class="manifest-list text-sm text-gray-200 leading-relaxed space-y-3">
+                            <li v-for="task in routeLogistics.craft" :key="task.id || task" class="border-b border-[#1E2D45] pb-3 last:border-0 last:pb-0 flex items-start gap-4 transition-all group">
+                                <input type="checkbox" v-model="checkedTasks[task.id || task]" class="mt-1 w-5 h-5 accent-emerald-500 cursor-pointer flex-shrink-0" :disabled="task.is_cancelled">
+                                
+                                <div class="flex-grow" :class="(checkedTasks[task.id || task] || task.is_cancelled) ? 'opacity-50 grayscale transition-all' : 'transition-all'">
+                                    <div v-if="task.is_cancelled" class="text-[10px] font-black bg-rose-900 text-rose-300 px-1.5 py-0.5 rounded inline-flex items-center gap-1.5 mb-1 border border-rose-700 shadow-[0_0_5px_rgba(225,29,72,0.5)]">
+                                        <i data-lucide="x-circle" class="w-3 h-3"></i> CANCELED (Rugi Material)
+                                    </div>
+                                    <div v-html="task.text || task" :class="task.is_cancelled ? 'line-through' : ''"></div>
+                                    
+                                    <div v-if="task.raw_data && !task.is_cancelled" class="mt-2.5 flex flex-wrap items-center gap-2">
+                                        <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Adjust QTY:</span>
+                                        <input type="number" min="0" 
+                                            class="w-16 bg-[#090F1C] border border-[#1E2D45] text-cyan-400 text-xs px-2 py-0.5 rounded outline-none focus:border-cyan-500 transition-all text-center placeholder-gray-600"
+                                            :placeholder="cfg['q' + task.raw_data.enchant.replace('.', '')]"
+                                            :value="cfg.adjusted_qty_crafts?.[task.raw_data.item]?.[task.raw_data.enchant] ?? ''"
+                                            @change="setCraftQty(task.raw_data.item, task.raw_data.enchant, $event.target.value)"
+                                        >
+                                        <span v-if="cfg.adjusted_qty_crafts?.[task.raw_data.item]?.[task.raw_data.enchant] !== undefined" class="text-[10px] font-black text-amber-400 px-1.5 py-0.5 bg-amber-900/30 rounded border border-amber-800 flex items-center gap-1.5">
+                                            <i data-lucide="alert-triangle" class="w-3 h-3 text-amber-500"></i> CUSTOM QTY
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <button v-if="task.raw_data" @click="toggleCancelCraft(task.raw_data)" class="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-[10px] font-bold px-2 py-1 rounded border shadow-sm flex items-center gap-1.5" :class="task.is_cancelled ? 'bg-emerald-900/50 text-emerald-300 border-emerald-700 hover:bg-emerald-800' : 'bg-rose-900/50 text-rose-300 border-rose-700 hover:bg-rose-800'">
+                                    <i v-if="task.is_cancelled" data-lucide="refresh-cw" class="w-3 h-3"></i>
+                                    <i v-else data-lucide="x-circle" class="w-3 h-3"></i>
+                                    {{ task.is_cancelled ? 'RESTORE' : 'CANCEL' }}
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <p v-else class="text-sm text-gray-500 italic mt-2">Tidak ada gear yang di-craft di kota ini.</p>
+                </div>
+
+            </div>
+        </div>
+    {% endraw %}

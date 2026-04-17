@@ -1,0 +1,135 @@
+{% raw %}
+<div v-if="activeTab === 'list_item'">
+    
+    <div class="glass-card p-6 mb-8 border-t-4 border-amber-500 shadow-[0_10px_30px_rgba(245,158,11,0.2)] bg-gradient-to-b from-[#090F1C] to-[#0B1120]">
+        <div class="flex flex-col md:flex-row justify-between md:items-start gap-4 mb-5">
+            <div>
+                <h2 class="text-xl font-black text-amber-400 uppercase tracking-widest drop-shadow-md flex items-center gap-3">
+                    <i data-lucide="bot" class="w-6 h-6"></i> AI Market Optimizer — {{ activeListItemTab === 'gear' ? 'GEAR ARMORY' : 'CONSUMABLES' }}
+                </h2>
+                <p class="text-xs text-gray-400 mt-1">Sistem akan menyaring market menggunakan data dari Local dan Global (ADC) sesuai batas modal lu.</p>
+            </div>
+            <div class="flex items-center bg-black/40 border border-gray-700 rounded-lg px-4 py-2 shadow-inner h-14">
+                <span class="text-sm text-gray-500 font-bold mr-3 uppercase tracking-widest">Modal (Silver)</span>
+                <input type="number" v-model="cfg.smart_budget" @change="saveAndFetch" class="bg-transparent text-amber-400 font-black font-mono text-right w-32 focus:outline-none text-lg" placeholder="16000000">
+            </div>
+        </div>
+
+        <div class="bg-[#090F1C] border border-amber-900/30 rounded-lg p-4 mb-5 shadow-inner transition-all">
+            <p class="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> AI Filter Settings
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div>
+                    <span class="text-[10px] text-gray-400 uppercase block mb-1.5 font-bold">Max Barang</span>
+                    <input type="number" v-model="cfg.ai_settings.max_items" max="48" @change="saveAndFetch" class="input-pro w-full px-3 py-2 rounded text-xs font-bold bg-black/50 border border-gray-700 text-amber-300 focus:border-amber-500" title="Maksimal slot inventory 48">
+                </div>
+                <div>
+                    <span class="text-[10px] text-gray-400 uppercase block mb-1.5 font-bold">Min Margin (%)</span>
+                    <input type="number" v-model="cfg.ai_settings.min_margin" @change="saveAndFetch" class="input-pro w-full px-3 py-2 rounded text-xs font-bold bg-black/50 border border-gray-700 text-emerald-400 focus:border-emerald-500">
+                </div>
+                <div>
+                    <span class="text-[10px] text-gray-400 uppercase block mb-1.5 font-bold">Min Profit / Unit</span>
+                    <input type="number" v-model="cfg.ai_settings.min_profit" @change="saveAndFetch" class="input-pro w-full px-3 py-2 rounded text-xs font-bold bg-black/50 border border-gray-700 text-emerald-400 focus:border-emerald-500">
+                </div>
+                <div>
+                    <span class="text-[10px] text-gray-400 uppercase block mb-1.5 font-bold">Vol. Target (%)</span>
+                    <input type="number" v-model="cfg.ai_settings.vol_target" @change="saveAndFetch" class="input-pro w-full px-3 py-2 rounded text-xs font-bold bg-black/50 border border-gray-700 text-cyan-400 focus:border-cyan-500" title="Berapa persen jatah market yang mau lu borong?">
+                </div>
+                <div>
+                    <span class="text-[10px] text-gray-400 uppercase block mb-1.5 font-bold" v-if="activeListItemTab === 'gear'">Tipe Barang</span>
+                    <select v-if="activeListItemTab === 'gear'" v-model="cfg.ai_settings.item_type" @change="saveAndFetch" class="input-pro w-full px-3 py-2 rounded text-xs font-bold bg-black/50 border border-gray-700 text-purple-300 focus:border-purple-500">
+                        <option value="both">Semua (Mixed)</option>
+                        <option value="normal">Non-Artifact Only</option>
+                        <option value="artifact">Artifact Only</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-amber-900/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <span class="text-[10px] text-gray-400 uppercase font-bold">Target Enchant:</span>
+                    <label class="flex items-center gap-1.5 text-xs font-bold text-gray-300 cursor-pointer hover:text-white transition-colors"><input type="checkbox" v-model="cfg.ai_settings.enc['.0']" @change="saveAndFetch" class="accent-amber-500 w-3.5 h-3.5"> .0</label>
+                    <label class="flex items-center gap-1.5 text-xs font-bold text-emerald-400 cursor-pointer hover:text-emerald-300 transition-colors"><input type="checkbox" v-model="cfg.ai_settings.enc['.1']" @change="saveAndFetch" class="accent-emerald-500 w-3.5 h-3.5"> .1</label>
+                    <label class="flex items-center gap-1.5 text-xs font-bold text-cyan-400 cursor-pointer hover:text-cyan-300 transition-colors"><input type="checkbox" v-model="cfg.ai_settings.enc['.2']" @change="saveAndFetch" class="accent-cyan-500 w-3.5 h-3.5"> .2</label>
+                    <label class="flex items-center gap-1.5 text-xs font-bold text-purple-400 cursor-pointer hover:text-purple-300 transition-colors"><input type="checkbox" v-model="cfg.ai_settings.enc['.3']" @change="saveAndFetch" class="accent-purple-500 w-3.5 h-3.5"> .3</label>
+                    <label class="flex items-center gap-1.5 text-xs font-bold text-yellow-400 cursor-pointer hover:text-yellow-300 transition-colors"><input type="checkbox" v-model="cfg.ai_settings.enc['.4']" @change="saveAndFetch" class="accent-yellow-500 w-3.5 h-3.5"> .4</label>
+                </div>
+                <button @click="runSmartAnalyzer(activeListItemTab)" :disabled="isAnalyzing" class="bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 text-[#090F1C] px-8 py-2.5 rounded text-xs font-black shadow-[0_0_15px_rgba(245,158,11,0.4)] transition-all transform hover:-translate-y-0.5 disabled:opacity-50 flex items-center gap-2">
+                    <span v-show="isAnalyzing" class="flex items-center"><i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i></span>
+                    <span v-show="!isAnalyzing" class="flex items-center"><i data-lucide="zap" class="w-4 h-4"></i></span>
+                    <span v-if="isAnalyzing">MENCARI...</span>
+                    <span v-else>JALANKAN AI</span>
+                </button>
+            </div>
+        </div>
+
+        <div v-if="smartSetupResult" class="mt-6 border-t border-amber-900/50 pt-6 animate-fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="bg-[#0D1626] p-4 rounded-xl border border-[#1E2D45] shadow-inner flex flex-col justify-center">
+                    <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-800">
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Est. Weight</span>
+                        <span class="text-sm font-bold font-mono text-cyan-400">{{ smartSetupResult.estWeight.toLocaleString() }} kg</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-800">
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Est. Cost</span>
+                        <span class="text-sm font-bold font-mono text-gray-300">{{ smartSetupResult.estCost.toLocaleString() }} / {{ cfg.smart_budget.toLocaleString() }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-amber-500 uppercase tracking-widest">Est. Profit</span>
+                        <span class="text-xl font-black font-mono text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]">+{{ smartSetupResult.estProfit.toLocaleString() }}</span>
+                    </div>
+                </div>
+
+                <div class="bg-[#0D1626] p-4 rounded-xl border border-[#1E2D45] shadow-inner lg:col-span-2">
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex justify-between">
+                        <span>Selected Items</span>
+                        <span class="text-emerald-400">{{ smartSetupResult.picks.length }} / {{ Math.min(cfg.ai_settings.max_items, 48) }} MAX</span>
+                    </p>
+                    <div class="flex flex-wrap gap-2 overflow-y-auto max-h-24 custom-scrollbar mb-4">
+                        <span v-for="p in smartSetupResult.picks" :key="p" class="text-[10px] font-bold bg-indigo-950/40 text-indigo-300 px-2 py-1 rounded border border-indigo-900/50 whitespace-nowrap">
+                            {{ getRealName(p) }}
+                        </span>
+                    </div>
+                    
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1 flex items-center gap-1.5"><i data-lucide="bot" class="w-3 h-3"></i> AI REASONING</p>
+                    <p class="text-[11px] text-gray-400 italic bg-black/30 p-2 rounded-lg border border-gray-800/60 leading-relaxed">{{ smartSetupResult.reasoning }}</p>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button @click="smartSetupResult = null" class="px-6 py-4 bg-gray-800 text-gray-400 font-black rounded-xl hover:bg-gray-700 transition-all uppercase tracking-widest text-xs">Dismiss</button>
+                <button @click="applySmartSetup" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i> APPLY TO DASHBOARD
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📊 SELECTED PROFIT ANALYTICS -->
+    <div class="grid grid-cols-1 lg:grid-cols-1 gap-8 mb-8">
+        <div class="glass-card p-6 border-l-4 border-indigo-500">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-sm font-black text-white uppercase tracking-widest flex items-center gap-3">
+                    <i data-lucide="trending-up" class="w-6 h-6 text-indigo-400"></i> Category Profit Distribution
+                </h3>
+                <button @click="unselectAllItems" class="text-[10px] font-black text-rose-400 hover:text-rose-300 uppercase tracking-widest px-3 py-1 bg-rose-950/20 border border-rose-900/30 rounded-lg">Wipe Selection</button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-4">
+                <div v-for="(p, cat) in categoryProfits" :key="cat" 
+                     v-show="(activeListItemTab === 'gear' && !['foods', 'potions', 'luxury'].includes(cat)) || (activeListItemTab === 'consumable' && ['foods', 'potions'].includes(cat))"
+                     class="bg-black/20 p-4 rounded-xl border border-[#1E2D45] flex flex-col items-center">
+                    <span class="text-[10px] font-black text-gray-500 uppercase mb-2 text-center">{{ cat }}</span>
+                    <span class="text-sm font-black mono" :class="p >= 0 ? 'text-emerald-400' : 'text-rose-500'">{{ formatK(p) }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📋 SELECTED ITEMS DETAIL (TABLE) -->
+    <div v-if="activeTab === 'list_item'">
+{% endraw %}
+        {% include 'tabs/component_selected_items.html' %}
+{% raw %}
+    </div>
+</div>
+{% endraw %}
